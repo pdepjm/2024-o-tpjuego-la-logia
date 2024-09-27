@@ -1,16 +1,16 @@
 import wollok.game.*
+import wollok.lang.*
+import escenarios.*
 
-import pepita.*
+program WollokRoad {
+	game.title("Wollok Road")
+	game.height(25)
+	game.width(44)
+	game.cellSize(40)
 
-program PepitaGame {
-	game.title("Pepita")
-	game.height(10)
-	game.width(10)
-	game.cellSize(100)
-
-	game.addVisual(pepita)
-
-	keyboard.w().onPressDo({ pepita.fly(1) })
+	const portada = new Background()
+	escenario.iniciarNivel(portada)  // Start the game on the title screen
 
 	game.start()
 }
+
