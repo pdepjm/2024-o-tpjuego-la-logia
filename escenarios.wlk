@@ -8,11 +8,15 @@ var property nivel = null
     method iniciarNivel(nuevoNivel) {
         nuevoNivel.configuracionFondo()
         nuevoNivel.configuracionTeclado()
+        nuevoNivel.configuracionInicial()
         self.nivel(nuevoNivel)
     }
 }
  
 class Background {
+    method configuracionInicial() {
+    }
+
     method configuracionTeclado() {
         keyboard.enter().onPressDo { self.pressEnter() }
     }
@@ -30,12 +34,19 @@ class Background {
 
 
 class Nivel1 {
-    method configuracionTeclado() {
-        // Aquí puedes agregar configuraciones de teclado específicas para Nivel1
-    }
+    method configuracionInicial(){		
+		game.addVisualCharacter(main)
+	}
+	
+	method configuracionTeclado(){
+		keyboard.w().onPressDo {main.moverArriba()}
+		keyboard.s().onPressDo {main.moverAbajo()}
+		keyboard.d().onPressDo {main.moverDerecha()}
+		keyboard.a().onPressDo {main.moverIzquierda()}
+	}
 
     method configuracionFondo() {
-        game.addVisual(fondoNivel1)
+        game.boardGround(fondoNivel1)
     }
 
     method removerFondo() {

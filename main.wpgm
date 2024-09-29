@@ -2,7 +2,7 @@ import wollok.game.*
 import wollok.lang.*
 import escenarios.*
 
-program WollokRoad {
+program WoljlokRoad {
 	game.title("Wollok Road")
 	game.height(25)
 	game.width(44)
