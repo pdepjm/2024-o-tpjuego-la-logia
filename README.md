@@ -1,11 +1,14 @@
-#  (reemplazar nombre de juego acá) 
+#  Wollok road
 
 UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 ## Equipo de desarrollo: 
 
-- completar...
-- completar...
+- Sofia Baudo
+- Marcelo Nahuel Buergo
+- Ignacio Martin Cordoba
+- Gonzalo Garcia Fontenla
+- Micaela Beatriz Rodriguez Miño
  
 
 ## Capturas 
