@@ -1,5 +1,6 @@
 import personaje.*
 import elementos.*
+import estados.*
 import wollok.game.*
 
 object escenario {
@@ -36,6 +37,8 @@ class Background {
 class Nivel1 {
     method configuracionInicial(){		
 		game.addVisualCharacter(main)
+        game.addVisual(puntos)
+        game.addVisual(vida)
 	}
 	
 	method configuracionTeclado(){
