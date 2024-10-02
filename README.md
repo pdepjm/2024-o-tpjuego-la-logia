@@ -10,16 +10,28 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 - Gonzalo Garcia Fontenla
 - Micaela Beatriz Rodriguez Miño
  
-
 ## Capturas 
 
-![pepita](assets/golondrina.png)
+![personajePrincipal](assets/personaje.png)
 
 ## Reglas de Juego / Instrucciones
 
-(completar...)
+Obstaculos:
+
+Bicicleta: Disminuye 5 de vida
+Auto: Disminuye 10 de vida
+Camion: Disminuye 15 de vida
+Colectivo: Disminuye 20 de vida
+
+Potenciadores:
+
+Corazon: Aumenta 15 de vida
+Moneda: Suma 10 puntos
 
 ## Controles:
 
-- `W` para...
+- Avanzar: ⬆
+- Retroceder: ⬇
+- Izquierda: ⬅
+- Derecha: ⮕
 
