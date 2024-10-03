@@ -67,6 +67,10 @@ class Nivel1 {
 		keyboard.s().onPressDo {main.moverAbajo()}
 		keyboard.d().onPressDo {main.moverDerecha()}
 		keyboard.a().onPressDo {main.moverIzquierda()}
+        keyboard.up().onPressDo {main.moverArriba()}
+		keyboard.down().onPressDo {main.moverAbajo()}
+		keyboard.right().onPressDo {main.moverDerecha()}
+		keyboard.left().onPressDo {main.moverIzquierda()}
 	}
 
     method configuracionFondo() {
@@ -88,6 +92,8 @@ class Nivel1 {
         objetos.add(new Road(position = game.at(0, 19)))
         objetos.add(new Road(position = game.at(0, 20)))
         objetos.add(new Road(position = game.at(0, 21)))
+
+        objetos.add(new Car(position = game.at(0, 2)))
     }
 
     method instanciarObjetosExtra() {

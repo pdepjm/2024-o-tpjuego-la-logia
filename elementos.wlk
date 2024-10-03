@@ -31,3 +31,21 @@ class Tree {
 		game.say(personaje, "Te comiste un arbol")
 	}
 }
+
+class Car {
+	var property position = game.at(0,0)
+
+	method image() = "PixelCar.png"
+
+	method visual() = game.addVisual(self)
+  
+  	method chocasteCon(personaje) {
+		game.say(personaje, "Te chocaste con un auto")
+	}
+
+	method moverse() {
+		const y = 2
+		const x = position.x() + 1 
+		position = game.at(x, y)
+	}
+}
