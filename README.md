@@ -26,16 +26,16 @@ Obstaculos:
 Bicicleta: Disminuye 5 de vida  
 ![bicicleta](assets/bicicleta.png)  
 Auto: Disminuye 10 de vida  
-![auto](assets/auto.png)  
+![auto](assets/need-resizing/auto.png)  
 Camion: Disminuye 15 de vida  
-![camion](assets/camion.png)  
+![camion](assets/need-resizing/camion.png)  
 Colectivo: Disminuye 20 de vida    
-![camion](assets/bus.png)  
+![camion](assets/need-resizing/bus.png)  
 
 Potenciadores:
 
 Corazon: Aumenta 15 de vida   
-![corazon](assets/corazon.png)    
+![corazon](assets/need-resizing/corazon.png)    
 Moneda: Suma 10 puntos  
 
 ## Controles:
