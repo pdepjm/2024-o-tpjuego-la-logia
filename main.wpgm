@@ -10,9 +10,6 @@ program WollokRoad {
 	game.width(44)
 	game.cellSize(40)
 
-	const car = new Car()
-    game.onTick(1000, "movimiento", {car.moverse()})
-
 	const portada = new Background()
 	escenario.iniciarNivel(portada) 
 
