@@ -1,16 +1,17 @@
 import wollok.game.*
 import wollok.lang.*
 import escenarios.*
+import elementos.*
 
-program WoljlokRoad {
+
+program WollokRoad {
 	game.title("Wollok Road")
 	game.height(25)
 	game.width(44)
 	game.cellSize(40)
 
 	const portada = new Background()
-	escenario.iniciarNivel(portada)  // Start the game on the title screen
+	escenario.iniciarNivel(portada) 
 
 	game.start()
 }
-
