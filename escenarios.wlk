@@ -59,8 +59,8 @@ class Nivel1 {
         game.addVisual(puntos)
         game.addVisual(vida)
         game.onCollideDo(main,{algo => algo.chocasteCon(main)})
-        game.onTick(200, "movimiento",{
-            objetos.forEach{o => o.moverse()}})
+        game.onTick(100, "movimiento",{
+            objetosExtra.forEach{o => o.moverse()}})
 	}
 	
 	method configuracionTeclado(){
@@ -93,8 +93,6 @@ class Nivel1 {
         objetos.add(new Road(position = game.at(0, 19)))
         objetos.add(new Road(position = game.at(0, 20)))
         objetos.add(new Road(position = game.at(0, 21)))
-
-        objetos.add(new Car(position = game.at(0, 2)))
     }
 
     method instanciarObjetosExtra() {
@@ -125,6 +123,19 @@ class Nivel1 {
         // objetosExtra.add(new Tree(position = game.at(1, 23)))
         // objetosExtra.add(new Tree(position = game.at(19, 23)))
         // objetosExtra.add(new Tree(position = game.at(40, 23)))
+
+        objetosExtra.add(new Car(position = game.at(-4, 2)))
+        objetosExtra.add(new Car(position = game.at(-4, 4)))
+        objetosExtra.add(new Car(position = game.at(-4, 7)))
+        objetosExtra.add(new Car(position = game.at(-4, 12)))
+
+        objetosExtra.add(new FiestaTuneado(position = game.at(44, 6)))
+        objetosExtra.add(new FiestaTuneado(position = game.at(44, 11)))
+
+        objetosExtra.add(new Chopperita(position = game.at(-4, 9)))
+        objetosExtra.add(new Chopperita(position = game.at(-4, 17)))
+
+        objetosExtra.add(new Colectivo(position = game.at(-4, 14)))
     }
 
     method configuracionVisual() {

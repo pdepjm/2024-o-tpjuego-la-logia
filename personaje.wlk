@@ -1,6 +1,6 @@
 object main {
     var property position = game.at(20, 0) // Posición inicial del personaje
-    var property imagen = "personaje.png"
+    var property imagen = "personaje1.png"
     const maxX = 42 // Máximo X (derecho)
     const maxY = 0 // Máximo Y (inferior)
     const minX = 0 // Mínimo X (izquierdo)

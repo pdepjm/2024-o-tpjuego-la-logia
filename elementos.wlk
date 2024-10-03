@@ -45,7 +45,7 @@ class Tree {
 class Car {
 	var property position = game.at(0,0)
 
-	method image() = "PixelCar.png"
+	method image() = "PixelCar2.png"
 
 	method visual() = game.addVisual(self)
   
@@ -57,13 +57,79 @@ method moverse() {
     const x = position.x() + 1
     const y = position.y()
     
-    // Comprueba si el auto está dentro de los límites
-    if (x < game.width()) {
+    if (x < game.width() + 1) {
         position = game.at(x, y)
     } else {
-        // Si el auto sale de la pantalla, reiniciarlo a la izquierda
         position = game.at(0, y)
     }
 }
+}
 
+class FiestaTuneado {
+	var property position = game.at(0,0)
+
+	method image() = "spr_rally_2.png"
+
+	method visual() = game.addVisual(self)
+  
+  	method chocasteCon(personaje) {
+		game.say(personaje, "Te chocaste con un fiestita tuneado")
+	}
+
+method moverse() {
+    const x = position.x() - 1
+    const y = position.y()
+    
+    if (x > -3) {
+        position = game.at(x, y)
+    } else {
+        position = game.at(44, y)
+    }
+}
+}
+
+class Chopperita {
+	var property position = game.at(0,0)
+
+	method image() = "spr_chopper_2.png"
+
+	method visual() = game.addVisual(self)
+  
+  	method chocasteCon(personaje) {
+		game.say(personaje, "Te chocaste con una Chopperita")
+	}
+
+	method moverse() {
+    const x = position.x() + 1
+    const y = position.y()
+    
+    if (x < game.width() + 1) {
+        position = game.at(x, y)
+    } else {
+        position = game.at(0, y)
+    }
+	}
+}
+
+class Colectivo {
+	var property position = game.at(0,0)
+
+	method image() = "double decker2.png"
+
+	method visual() = game.addVisual(self)
+  
+  	method chocasteCon(personaje) {
+		game.say(personaje, "Te chocaste con un 101")
+	}
+
+method moverse() {
+    const x = position.x() - 1
+    const y = position.y()
+    
+    if (x > -3) {
+        position = game.at(x, y)
+    } else {
+        position = game.at(44, y)
+    }
+}
 }
