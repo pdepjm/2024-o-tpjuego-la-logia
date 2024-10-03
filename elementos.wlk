@@ -7,7 +7,7 @@ object fondoPortada {
 
 object fondoNivel1 {
 	var property position = game.at(0, 0)
-	var property imagen = "caca.png"
+	var property imagen = "background-Level1.png"
 
 	method image() = imagen
 }
