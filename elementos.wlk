@@ -1,3 +1,5 @@
+import wollok.game.*
+
 object fondoPortada {
 	var property position = game.at(0, 0)
 	var property imagen = "Designer.jpeg"
@@ -12,7 +14,6 @@ object fondoNivel1 {
 	method image() = imagen
 	
 	method chocasteCon(personaje) {
-		game.say(personaje, "Te chocaste con el fondo")
 	} 
 }
 
@@ -24,7 +25,6 @@ class Road {
   	method visual() = game.addVisual(self)
 
 	method chocasteCon(personaje) {
-		game.say(personaje, "Te chocaste con la ruta")
 	} 
 
 	method moverse(){}
@@ -43,27 +43,28 @@ class Tree {
 }
 
 class Car {
-	var property position = game.at(0,0)
+    var property position = game.at(0, 0)
 
-	method image() = "PixelCar2.png"
+    method image() = "PixelCar2.png"
 
-	method visual() = game.addVisual(self)
-  
-  	method chocasteCon(personaje) {
-		game.say(personaje, "Te chocaste con un auto")
-	}
+    method visual() = game.addVisual(self)
 
-method moverse() {
-    const x = position.x() + 1
-    const y = position.y()
-    
-    if (x < game.width() + 1) {
-        position = game.at(x, y)
-    } else {
-        position = game.at(0, y)
+    method chocasteCon(personaje) {
+        game.say(personaje, "Te chocaste con un auto")
+    }
+
+    method moverse() {
+        const x = position.x() + 1
+        const y = position.y()
+        
+        if (x < game.width() + 1) {
+            position = game.at(x, y)
+        } else {
+            position = game.at(0, y)
+        }
     }
 }
-}
+
 
 class FiestaTuneado {
 	var property position = game.at(0,0)
@@ -132,4 +133,40 @@ method moverse() {
         position = game.at(44, y)
     }
 }
+}
+
+object carTraffic {
+	var property autos = []
+
+	method generarAutos(autosMax) {
+		if(autos.size() < autosMax){
+			const nuevoAuto = new Car(position = game.at(-4, 2))
+			game.addVisual(nuevoAuto)
+			autos.add(nuevoAuto)
+	}
+	}
+
+	method moverAutos() {
+		if(autos.size() > 0){
+			autos.forEach({z => z.moverse()})
+		}
+	}
+}
+
+object fiestaTraffic {
+	var property autos = []
+
+	method generarAutos(autosMax) {
+		if(autos.size() < autosMax){
+			const nuevoAuto = new FiestaTuneado(position = game.at(44, 6))
+			game.addVisual(nuevoAuto)
+			autos.add(nuevoAuto)
+	}
+	}
+
+	method moverAutos() {
+		if(autos.size() > 0){
+			autos.forEach({z => z.moverse()})
+		}
+	}
 }

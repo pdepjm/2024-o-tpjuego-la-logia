@@ -59,8 +59,16 @@ class Nivel1 {
         game.addVisual(puntos)
         game.addVisual(vida)
         game.onCollideDo(main,{algo => algo.chocasteCon(main)})
-        game.onTick(100, "movimiento",{
-            objetosExtra.forEach{o => o.moverse()}})
+        game.onTick(10000, "Oleada autos dos", {=> carTraffic.generarAutos(5)}) 
+        game.onTick(8000, "Oleada autos", {=> carTraffic.generarAutos(3)}) 
+        game.onTick(4000, "Oleada autos dos", {=> carTraffic.generarAutos(3)}) 
+
+        game.onTick(15000, "Oleada fiesta dos", {=> fiestaTraffic.generarAutos(5)}) 
+        game.onTick(9000, "Oleada fiesta", {=> fiestaTraffic.generarAutos(2)}) 
+        game.onTick(4000, "Oleada fiesta dos", {=> fiestaTraffic.generarAutos(3)}) 
+
+        game.onTick(100, "Mover autos", {=> carTraffic.moverAutos()})
+        game.onTick(150, "Mover autos", {=> fiestaTraffic.moverAutos()})
 	}
 	
 	method configuracionTeclado(){
@@ -124,18 +132,18 @@ class Nivel1 {
         // objetosExtra.add(new Tree(position = game.at(19, 23)))
         // objetosExtra.add(new Tree(position = game.at(40, 23)))
 
-        objetosExtra.add(new Car(position = game.at(-4, 2)))
-        objetosExtra.add(new Car(position = game.at(-4, 4)))
-        objetosExtra.add(new Car(position = game.at(-4, 7)))
-        objetosExtra.add(new Car(position = game.at(-4, 12)))
+        // objetosExtra.add(new Car(position = game.at(-4, 2)))
+        // objetosExtra.add(new Car(position = game.at(-4, 4)))
+        // objetosExtra.add(new Car(position = game.at(-4, 7)))
+        // objetosExtra.add(new Car(position = game.at(-4, 12)))
 
-        objetosExtra.add(new FiestaTuneado(position = game.at(44, 6)))
-        objetosExtra.add(new FiestaTuneado(position = game.at(44, 11)))
+        // objetosExtra.add(new FiestaTuneado(position = game.at(44, 6)))
+        // objetosExtra.add(new FiestaTuneado(position = game.at(44, 11)))
 
-        objetosExtra.add(new Chopperita(position = game.at(-4, 9)))
-        objetosExtra.add(new Chopperita(position = game.at(-4, 17)))
+        // objetosExtra.add(new Chopperita(position = game.at(-4, 9)))
+        // objetosExtra.add(new Chopperita(position = game.at(-4, 17)))
 
-        objetosExtra.add(new Colectivo(position = game.at(-4, 14)))
+        // objetosExtra.add(new Colectivo(position = game.at(-4, 14)))
     }
 
     method configuracionVisual() {
