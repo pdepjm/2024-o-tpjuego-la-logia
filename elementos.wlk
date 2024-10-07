@@ -136,9 +136,9 @@ method moverse() {
 }
 
 object carTraffic {
-	method generarAutos(fiestas, autosMax) {
+	method generarAutos(fiestas, autosMax, x, y) {
 		if(fiestas.size() < autosMax){
-			const nuevoAuto = new Car(position = game.at(-4, 2))
+			const nuevoAuto = new Car(position = game.at(x, y))
 			game.addVisual(nuevoAuto)
 			fiestas.add(nuevoAuto)
 	}
@@ -152,9 +152,9 @@ object carTraffic {
 }
 
 object fiestaTraffic {
-	method generarAutos(autos, autosMax) {
+	method generarAutos(autos, autosMax, x, y) {
 		if(autos.size() < autosMax){
-			const nuevoAuto = new FiestaTuneado(position = game.at(44, 6))
+			const nuevoAuto = new FiestaTuneado(position = game.at(x, y))
 			game.addVisual(nuevoAuto)
 			autos.add(nuevoAuto)
 	}
@@ -169,9 +169,9 @@ object fiestaTraffic {
 
 object chopperTraffic {
 
-	method generarChopper(choppers, chopperMax) {
+	method generarChopper(choppers, chopperMax, x, y) {
 		if(choppers.size() < chopperMax){
-			const nuevaChoppe = new Chopperita(position = game.at(-4, 9))
+			const nuevaChoppe = new Chopperita(position = game.at(x, y))
 			game.addVisual(nuevaChoppe)
 			choppers.add(nuevaChoppe)
 	}
@@ -180,6 +180,23 @@ object chopperTraffic {
 	method moverChopper(choppers) {
 		if(choppers.size() > 0){
 			choppers.forEach({z => z.moverse()})
+		}
+	}
+}
+
+object busTraffic {
+
+	method generarBus(bus, busMax, x, y) {
+		if(bus.size() < busMax){
+			const nuevoBus = new Colectivo(position = game.at(x, y))
+			game.addVisual(nuevoBus)
+			bus.add(nuevoBus)
+	}
+	}
+
+	method moverBus(bus) {
+		if(bus.size() > 0){
+			bus.forEach({z => z.moverse()})
 		}
 	}
 }
