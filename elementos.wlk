@@ -136,27 +136,23 @@ method moverse() {
 }
 
 object carTraffic {
-	var property autos = []
-
-	method generarAutos(autosMax) {
-		if(autos.size() < autosMax){
+	method generarAutos(fiestas, autosMax) {
+		if(fiestas.size() < autosMax){
 			const nuevoAuto = new Car(position = game.at(-4, 2))
 			game.addVisual(nuevoAuto)
-			autos.add(nuevoAuto)
+			fiestas.add(nuevoAuto)
 	}
 	}
 
-	method moverAutos() {
-		if(autos.size() > 0){
-			autos.forEach({z => z.moverse()})
+	method moverAutos(fiestas) {
+		if(fiestas.size() > 0){
+			fiestas.forEach({z => z.moverse()})
 		}
 	}
 }
 
 object fiestaTraffic {
-	var property autos = []
-
-	method generarAutos(autosMax) {
+	method generarAutos(autos, autosMax) {
 		if(autos.size() < autosMax){
 			const nuevoAuto = new FiestaTuneado(position = game.at(44, 6))
 			game.addVisual(nuevoAuto)
@@ -164,9 +160,26 @@ object fiestaTraffic {
 	}
 	}
 
-	method moverAutos() {
+	method moverAutos(autos) {
 		if(autos.size() > 0){
 			autos.forEach({z => z.moverse()})
+		}
+	}
+}
+
+object chopperTraffic {
+
+	method generarChopper(choppers, chopperMax) {
+		if(choppers.size() < chopperMax){
+			const nuevaChoppe = new Chopperita(position = game.at(-4, 9))
+			game.addVisual(nuevaChoppe)
+			choppers.add(nuevaChoppe)
+	}
+	}
+
+	method moverChopper(choppers) {
+		if(choppers.size() > 0){
+			choppers.forEach({z => z.moverse()})
 		}
 	}
 }
