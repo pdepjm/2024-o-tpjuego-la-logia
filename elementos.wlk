@@ -1,3 +1,4 @@
+import estados.*
 import wollok.game.*
 
 object fondoPortada {
@@ -51,6 +52,8 @@ class Car {
 
     method chocasteCon(personaje) {
         game.say(personaje, "Te chocaste con un auto")
+		personaje.modificarVida(15)
+		game.say(personaje, personaje.valorVida().toString())
     }
 
     method moverse() {
