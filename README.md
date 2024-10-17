@@ -25,8 +25,10 @@ Obstaculos:
 
 Moto: Disminuye 15 de vida  
 ![moto](assets/spr_chopper_2.png)  
+
 Auto: Disminuye 15 de vida  
- 
+![auto](assets/PixelCar2.png)
+
 Auto Fiesta: Disminuye 15 de vida  
 ![fiesta](assets/spr_rally_2.png)  
 
