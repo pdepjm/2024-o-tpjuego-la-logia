@@ -11,6 +11,10 @@ object vida {
 
   method position() = game.at(42,24)
 
-  method text() = toby.valorVida()
+  method text() = toby.valorVida().toString()
+}
 
+object vida2 {
+  method position() = game.at(41,24)
+  method text() = "Vida: "
 }

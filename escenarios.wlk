@@ -78,6 +78,7 @@ class Nivel1 {
 		game.addVisualCharacter(toby)
         game.addVisual(puntos)
         game.addVisual(vida)
+        game.addVisual(vida2)
         game.onCollideDo(toby,{algo => algo.chocasteCon(toby)})
 	}
 	

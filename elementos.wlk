@@ -38,7 +38,6 @@ class Tree {
   	method visual() = game.addVisual(self)
   
   	method chocasteCon(personaje) {
-		game.say(personaje, "Te comiste un arbol")
 	}
 }
 
@@ -50,7 +49,6 @@ class Car {
     method visual() = game.addVisual(self)
 
     method chocasteCon(personaje) {
-        game.say(personaje, "Te chocaste con un auto")
 		personaje.modificarVida(15)
     }
 
@@ -75,7 +73,6 @@ class FiestaTuneado {
 	method visual() = game.addVisual(self)
   
   	method chocasteCon(personaje) {
-		game.say(personaje, "Te chocaste con un fiestita tuneado")
 		personaje.modificarVida(15)
 	}
 
@@ -99,7 +96,6 @@ class Chopperita {
 	method visual() = game.addVisual(self)
   
   	method chocasteCon(personaje) {
-		game.say(personaje, "Te chocaste con una Chopperita")
 		personaje.modificarVida(10)
 	}
 
@@ -123,7 +119,6 @@ class Colectivo {
 	method visual() = game.addVisual(self)
   
   	method chocasteCon(personaje) {
-		game.say(personaje, "Te chocaste con un 101")
 		personaje.modificarVida(30)
 	}
 
