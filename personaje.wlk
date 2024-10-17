@@ -1,4 +1,4 @@
-object main {
+object toby {
     var property position = game.at(20, 0) // Posición inicial del personaje
     var property imagen = "personaje1.png"
     const maxX = 42 // Máximo X (derecho)
@@ -6,6 +6,8 @@ object main {
     const minX = 0 // Mínimo X (izquierdo)
     const minY = 23 // Mínimo Y (superior)
     var valorVida = 100
+
+    method valorVida() = valorVida
     
     method image() = imagen
 

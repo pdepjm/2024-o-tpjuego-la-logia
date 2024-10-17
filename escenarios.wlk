@@ -59,21 +59,21 @@ class Nivel1 {
     var property objetosExtra = [] 
 
     method configuracionInicial(){		
-		game.addVisualCharacter(main)
+		game.addVisualCharacter(toby)
         game.addVisual(puntos)
         game.addVisual(vida)
-        game.onCollideDo(main,{algo => algo.chocasteCon(main)})
+        game.onCollideDo(toby,{algo => algo.chocasteCon(toby)})
 	}
 	
 	method configuracionTeclado(){
-		keyboard.w().onPressDo {main.moverArriba()}
-		keyboard.s().onPressDo {main.moverAbajo()}
-		keyboard.d().onPressDo {main.moverDerecha()}
-		keyboard.a().onPressDo {main.moverIzquierda()}
-        keyboard.up().onPressDo {main.moverArriba()}
-		keyboard.down().onPressDo {main.moverAbajo()}
-		keyboard.right().onPressDo {main.moverDerecha()}
-		keyboard.left().onPressDo {main.moverIzquierda()}
+		keyboard.w().onPressDo {toby.moverArriba()}
+		keyboard.s().onPressDo {toby.moverAbajo()}
+		keyboard.d().onPressDo {toby.moverDerecha()}
+		keyboard.a().onPressDo {toby.moverIzquierda()}
+        keyboard.up().onPressDo {toby.moverArriba()}
+		keyboard.down().onPressDo {toby.moverAbajo()}
+		keyboard.right().onPressDo {toby.moverDerecha()}
+		keyboard.left().onPressDo {toby.moverIzquierda()}
 	}
 
     method configuracionFondo() {

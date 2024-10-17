@@ -1,3 +1,5 @@
+import personaje.*
+
 object puntos {
 
   method position() = game.at(42,23)
@@ -9,5 +11,6 @@ object vida {
 
   method position() = game.at(42,24)
 
-  method text() = "Vida: 100"
+  method text() = toby.valorVida()
+
 }
