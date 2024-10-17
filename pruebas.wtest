@@ -1,0 +1,13 @@
+import elementos.*
+import personaje.*
+import escenarios.*
+import estados.*
+import main.*
+
+describe "Test de personaje" {
+  test "Personaje colisiona y pierde vida." {
+    const auto = new Car()
+    auto.chocasteCon(toby)
+    assert.that(toby.valorVida() < 100)
+  }
+}
