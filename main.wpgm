@@ -15,6 +15,3 @@ program WollokRoad {
 
 	game.start()
 }
-
-
-
