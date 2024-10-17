@@ -5,9 +5,14 @@ object main {
     const maxY = 0 // Máximo Y (inferior)
     const minX = 0 // Mínimo X (izquierdo)
     const minY = 23 // Mínimo Y (superior)
-
+    var valorVida = 100
+    
     method image() = imagen
 
+    method modificarVida(valorVehiculo) {
+        valorVida = (valorVida - valorVehiculo).max(0)
+
+    } 
     method moverArriba() {
         if (position.y() < minY) { // Solo moverse si no supera el borde superior
             position = position.up(1)
@@ -31,4 +36,6 @@ object main {
             position = position.left(1)
         }
     }
+
+
 }
