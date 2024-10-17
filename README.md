@@ -24,13 +24,14 @@ El jugador pierde puntos de vida cada vez que choca con algun obstaculo.
 Obstaculos:
 
 Moto: Disminuye 15 de vida  
-![bicicleta](assets/bicicleta.png)  
+![moto](assets/spr_chopper_2.png)  
 Auto: Disminuye 15 de vida  
  
 Auto Fiesta: Disminuye 15 de vida  
-![camion](assets/need-resizing/camion.png)  
-Colectivo: Disminuye 30 de vida    
+![fiesta](assets/spr_rally_2.png)  
 
+Colectivo: Disminuye 30 de vida    
+![colectivo](assets/double%20decker2.png)
 
 Potenciadores:
 
@@ -40,8 +41,8 @@ Moneda: Suma 10 puntos
 
 ## Controles:
 
-- Avanzar: ⬆
-- Retroceder: ⬇
-- Izquierda: ⬅
-- Derecha:  ⮕  
+- Avanzar: w
+- Retroceder: s
+- Izquierda: a
+- Derecha:  d  
 
