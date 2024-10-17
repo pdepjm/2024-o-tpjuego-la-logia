@@ -19,7 +19,7 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 El jugador debe obtener 30 puntos sin quedarse sin vida.  
 Inicia con 100 de vida y 0 puntos.  
 Para sumar puntos debe recolectar monedas.  
-El jugador pierde puntos de vida cada vez que choca con algun obstaculo.  
+El jugador pierde puntos de vida cada vez que choca con algun obstaculo y cuando su vida llega a 0 termina el juego  
 
 Obstaculos:
 
