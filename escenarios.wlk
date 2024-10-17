@@ -18,23 +18,15 @@ var property nivel = null
         self.nivel(nuevoNivel)
     }
 }
- 
-class Background {
-    method configuracionInicial() {
+
+class Nivel {
+        method configuracionInicial() {
     }
 
     method configuracionTeclado() {
-        keyboard.enter().onPressDo { self.pressEnter() }
     }
 
     method configuracionFondo() {
-        game.addVisual(fondoPortada)
-    }
-
-    method pressEnter() {
-        const nivel1 = new Nivel1()
-        game.removeVisual(fondoPortada) // Elimina el fondo actual
-        escenario.iniciarNivel(nivel1) // Inicia el nuevo nivel
     }
 
     method instanciarObjetos() {
@@ -52,7 +44,28 @@ class Background {
     method configuracionVehiculos() {
     }
 }
+ 
+class Background inherits Nivel {
+    override method configuracionTeclado() {
+        keyboard.enter().onPressDo { self.pressEnter() }
+    }
 
+    override method configuracionFondo() {
+        game.addVisual(fondoPortada)
+    }
+
+    method pressEnter() {
+        const nivel1 = new Nivel1()
+        game.removeVisual(fondoPortada) // Elimina el fondo actual
+        escenario.iniciarNivel(nivel1) // Inicia el nuevo nivel
+    }
+}
+
+class Gameover inherits Nivel { 
+    override method configuracionFondo() {
+        game.addVisual(fondoGameOver)
+    }
+}
 
 class Nivel1 {
     var property objetos = []
@@ -204,5 +217,13 @@ class Nivel1 {
         game.onTick(250, "Mover bus", {=> chopperTraffic.moverChopper(bus1)})
         game.onTick(250, "Mover bus", {=> chopperTraffic.moverChopper(bus2)})
         game.onTick(250, "Mover bus", {=> chopperTraffic.moverChopper(bus3)})
+    }
+
+    method loseLevel() { 
+        if(toby.perdio()) {
+            game.clear()
+            const lostBackground = new Gameover()
+            escenario.iniciarNivel(lostBackground)
+        }
     }
 }

@@ -8,27 +8,26 @@ object fondoPortada {
 	method image() = imagen
 }
 
+object fondoGameOver{
+	var property position = game.at(0,0)
+	var property imagen = "995812.png"
+	method image() = imagen
+}
+
 object fondoNivel1 {
 	var property position = game.at(0, 0)
 	var property imagen = "background-Level1.png"
 
 	method image() = imagen
 	
-	method chocasteCon(personaje) {
-	} 
 }
 
 class Road {
   	var property position
-
+	
   	method image() = "road1.png"
-
   	method visual() = game.addVisual(self)
 
-	method chocasteCon(personaje) {
-	} 
-
-	method moverse(){}
 }
 
 class Tree {
@@ -53,7 +52,6 @@ class Car {
     method chocasteCon(personaje) {
         game.say(personaje, "Te chocaste con un auto")
 		personaje.modificarVida(15)
-		game.say(personaje, personaje.valorVida().toString())
     }
 
     method moverse() {
@@ -79,7 +77,7 @@ class FiestaTuneado {
   	method chocasteCon(personaje) {
 		game.say(personaje, "Te chocaste con un fiestita tuneado")
 		personaje.modificarVida(15)
-		game.say(personaje, personaje.valorVida().toString())
+		
 	}
 
 method moverse() {
@@ -103,6 +101,8 @@ class Chopperita {
   
   	method chocasteCon(personaje) {
 		game.say(personaje, "Te chocaste con una Chopperita")
+		personaje.modificarVida(10)
+		
 	}
 
 	method moverse() {
@@ -127,7 +127,7 @@ class Colectivo {
   	method chocasteCon(personaje) {
 		game.say(personaje, "Te chocaste con un 101")
 		personaje.modificarVida(30)
-		game.say(personaje, personaje.valorVida().toString())
+		
 	}
 
 method moverse() {

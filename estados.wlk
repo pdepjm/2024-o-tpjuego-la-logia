@@ -4,7 +4,7 @@ object puntos {
 
   method position() = game.at(42,23)
 
-  method text() = "Puntos: 0"
+  method text() = "Puntos: "
 }
 
 object vida {

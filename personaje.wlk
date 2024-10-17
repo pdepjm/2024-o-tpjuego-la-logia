@@ -39,5 +39,7 @@ object toby {
         }
     }
 
+    method perdio()= self.valorVida() == 0
+       
 
 }
