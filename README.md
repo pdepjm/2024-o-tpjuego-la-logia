@@ -29,7 +29,7 @@ Auto: Disminuye 10 de vida
 ![auto](assets/need-resizing/auto.png)  
 Camion: Disminuye 15 de vida  
 ![camion](assets/need-resizing/camion.png)  
-Colectivo: Disminuye 20 de vida    
+Colectivo: Disminuye 30 de vida    
 ![camion](assets/need-resizing/bus.png)  
 
 Potenciadores:
