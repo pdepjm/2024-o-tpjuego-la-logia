@@ -23,14 +23,14 @@ El jugador pierde puntos de vida cada vez que choca con algun obstaculo.
 
 Obstaculos:
 
-Bicicleta: Disminuye 5 de vida  
+Moto: Disminuye 15 de vida  
 ![bicicleta](assets/bicicleta.png)  
-Auto: Disminuye 10 de vida  
-![auto](assets/need-resizing/auto.png)  
-Camion: Disminuye 15 de vida  
+Auto: Disminuye 15 de vida  
+ 
+Auto Fiesta: Disminuye 15 de vida  
 ![camion](assets/need-resizing/camion.png)  
 Colectivo: Disminuye 30 de vida    
-![camion](assets/need-resizing/bus.png)  
+
 
 Potenciadores:
 
