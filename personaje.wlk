@@ -13,8 +13,8 @@ object toby {
 
     method modificarVida(valorVehiculo) {
         valorVida = (valorVida - valorVehiculo).max(0)
-
     } 
+     
     method moverArriba() {
         if (position.y() < minY) { // Solo moverse si no supera el borde superior
             position = position.up(1)

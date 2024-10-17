@@ -15,6 +15,7 @@ var property nivel = null
         nuevoNivel.configuracionVehiculos()
         nuevoNivel.instanciarObjetosExtra()
         nuevoNivel.configuracionVisualExtra()
+        nuevoNivel.finalizarNivel()
         self.nivel(nuevoNivel)
     }
 }
@@ -43,6 +44,8 @@ class Nivel {
 
     method configuracionVehiculos() {
     }
+
+    method finalizarNivel(){}
 }
  
 class Background inherits Nivel {
@@ -221,9 +224,13 @@ class Nivel1 {
 
     method loseLevel() { 
         if(toby.perdio()) {
-            game.clear()
             const lostBackground = new Gameover()
+            game.removeVisual(fondoNivel1) 
             escenario.iniciarNivel(lostBackground)
         }
+    }
+
+    method finalizarNivel(){
+        game.onTick(500,"verificar si perdio" , { => self.loseLevel() })
     }
 }

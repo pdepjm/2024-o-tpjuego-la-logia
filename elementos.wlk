@@ -10,7 +10,7 @@ object fondoPortada {
 
 object fondoGameOver{
 	var property position = game.at(0,0)
-	var property imagen = "995812.png"
+	var property imagen = "gameOverBackground1.png"
 	method image() = imagen
 }
 
@@ -77,7 +77,6 @@ class FiestaTuneado {
   	method chocasteCon(personaje) {
 		game.say(personaje, "Te chocaste con un fiestita tuneado")
 		personaje.modificarVida(15)
-		
 	}
 
 method moverse() {
@@ -102,7 +101,6 @@ class Chopperita {
   	method chocasteCon(personaje) {
 		game.say(personaje, "Te chocaste con una Chopperita")
 		personaje.modificarVida(10)
-		
 	}
 
 	method moverse() {
@@ -127,7 +125,6 @@ class Colectivo {
   	method chocasteCon(personaje) {
 		game.say(personaje, "Te chocaste con un 101")
 		personaje.modificarVida(30)
-		
 	}
 
 method moverse() {
