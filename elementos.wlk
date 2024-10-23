@@ -1,33 +1,47 @@
 import estados.*
+import main.* 
+import escenarios.*
 import wollok.game.*
 
 object fondoPortada {
 	var property position = game.at(0, 0)
-	var property imagen = "Designer.jpeg"
-
-	method image() = imagen
+	method image() = "Designer.jpeg"
 }
 
+object enter {
+	var property position = game.at(30,-3)
+
+	method image() = "image2.png"
+
+	method actualizarEnter() {
+			game.onTick(500, "actualizar enter", { => self.visual()})
+	}
+
+	method visual() {
+		if(game.hasVisual(self)) game.removeVisual(self) else game.addVisual(self)
+	}
+
+	method borrarObjeto() {
+		position = game.at(10000, 10000)
+	}
+}
+
+
 object fondoGameOver{
-	var property position = game.at(0,0)
-	var property imagen = "gameOverBackground1.png"
-	method image() = imagen
+	var property position = game.at(0,0) 
+	method image() = "gameOverBackground1.png"
 }
 
 object fondoNivel1 {
 	var property position = game.at(0, 0)
-	var property imagen = "background-Level1.png"
-
-	method image() = imagen
+	method image() = "background-Level1.png"
 	
 }
 
 class Road {
   	var property position
-	
   	method image() = "road1.png"
   	method visual() = game.addVisual(self)
-
 }
 
 class Tree {
@@ -41,18 +55,23 @@ class Tree {
 	}
 }
 
-class Car {
-    var property position = game.at(0, 0)
+class Vehiculo {
+	var property position = game.at(0,0)
 
-    method image() = "PixelCar2.png"
+	method visual() = game.addVisual(self)
 
-    method visual() = game.addVisual(self)
+	method chocasteCon(personaje)
+	method moverse()
+}
+class Car inherits Vehiculo{
 
-    method chocasteCon(personaje) {
+	method image() = "PixelCar2.png"
+
+    override method chocasteCon(personaje) {
 		personaje.modificarVida(15)
     }
 
-    method moverse() {
+    override method moverse() {
         const x = position.x() + 1
         const y = position.y()
         
@@ -65,41 +84,33 @@ class Car {
 }
 
 
-class FiestaTuneado {
-	var property position = game.at(0,0)
-
+class FiestaTuneado inherits Vehiculo {
 	method image() = "spr_rally_2.png"
 
-	method visual() = game.addVisual(self)
-  
-  	method chocasteCon(personaje) {
+  	override method chocasteCon(personaje) {
 		personaje.modificarVida(15)
 	}
 
-method moverse() {
-    const x = position.x() - 1
-    const y = position.y()
-    
-    if (x > -3) {
-        position = game.at(x, y)
-    } else {
-        position = game.at(44, y)
-    }
-}
+	override method moverse() {
+		const x = position.x() - 1
+		const y = position.y()
+		
+		if (x > -3) {
+			position = game.at(x, y)
+		} else {
+			position = game.at(44, y)
+		}
+	}
 }
 
-class Chopperita {
-	var property position = game.at(0,0)
-
+class Chopperita inherits Vehiculo {
 	method image() = "spr_chopper_2.png"
-
-	method visual() = game.addVisual(self)
   
-  	method chocasteCon(personaje) {
+  	override method chocasteCon(personaje) {
 		personaje.modificarVida(10)
 	}
 
-	method moverse() {
+	override method moverse() {
     const x = position.x() + 1
     const y = position.y()
     
@@ -111,27 +122,23 @@ class Chopperita {
 	}
 }
 
-class Colectivo {
-	var property position = game.at(0,0)
-
+class Colectivo inherits Vehiculo {
 	method image() = "double decker2.png"
-
-	method visual() = game.addVisual(self)
   
-  	method chocasteCon(personaje) {
+  	override method chocasteCon(personaje) {
 		personaje.modificarVida(30)
 	}
 
-method moverse() {
-    const x = position.x() - 1
-    const y = position.y()
-    
-    if (x > -3) {
-        position = game.at(x, y)
-    } else {
-        position = game.at(44, y)
-    }
-}
+	override method moverse() {
+		const x = position.x() - 1
+		const y = position.y()
+		
+		if (x > -3) {
+			position = game.at(x, y)
+		} else {
+			position = game.at(44, y)
+		}
+	}
 }
 
 object carTraffic {

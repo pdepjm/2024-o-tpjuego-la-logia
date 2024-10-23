@@ -6,6 +6,7 @@ object toby {
     const minX = 0 // Mínimo X (izquierdo)
     const minY = 23 // Mínimo Y (superior)
     var valorVida = 100
+    var property puntos = 0
 
     method valorVida() = valorVida
     
@@ -40,4 +41,5 @@ object toby {
     }
 
     method perdio()= self.valorVida() == 0
+    method gano(puntosNecesarios) = self.puntos() >= puntosNecesarios
 }
