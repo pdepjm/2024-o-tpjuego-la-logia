@@ -79,6 +79,7 @@ class Nivel {
     method instanciarObjetosExtra(){}
     method configuracionVehiculos(){}
     method finalizarNivel(){}
+    
 }
 
 class Background inherits Nivel {
@@ -99,6 +100,10 @@ class Background inherits Nivel {
 }
 
 class Gameover inherits Nivel { 
+    override method configuracionTeclado(){ 
+        keyboard.enter().onPressDo { self.pressEnter() }
+    }
+
     override method configuracionFondo() {
         game.addVisual(fondoGameOver)
     }
@@ -168,39 +173,39 @@ class Nivel1 inherits Nivel {
         
         game.onTick(3000, "Oleada autos", {=> carTraffic.generarAutos(autos1,2, -4, 2)}) 
         game.onTick(1000, "Oleada primer auto", {=> carTraffic.generarAutos(autos2, 2, -4, 2)})
-        game.onTick(6000, "Oleada autos tres", {=> carTraffic.generarAutos(autos3, 2, -4, 2)}) 
+        // game.onTick(6000, "Oleada autos tres", {=> carTraffic.generarAutos(autos3, 2, -4, 2)}) 
 
         game.onTick(4500, "Oleada autos", {=> carTraffic.generarAutos(autos1,2, -4, 4)}) 
         game.onTick(1900, "Oleada primer auto", {=> carTraffic.generarAutos(autos2, 2, -4, 4)})
-        game.onTick(7000, "Oleada autos tres", {=> carTraffic.generarAutos(autos3, 2, -4, 4)}) 
+        // game.onTick(7000, "Oleada autos tres", {=> carTraffic.generarAutos(autos3, 2, -4, 4)}) 
 
         game.onTick(4000, "Oleada fiesta", {=> fiestaTraffic.generarAutos(fiestas1, 1, 44, 6)}) 
-        game.onTick(9000, "Oleada fiesta dos", {=> fiestaTraffic.generarAutos(fiestas2, 1, 44, 6)}) 
-        game.onTick(15000, "Oleada fiesta tres", {=> fiestaTraffic.generarAutos(fiestas3, 1, 44, 6)}) 
+        game.onTick(10000, "Oleada fiesta dos", {=> fiestaTraffic.generarAutos(fiestas2, 1, 44, 6)}) 
+        // game.onTick(15000, "Oleada fiesta tres", {=> fiestaTraffic.generarAutos(fiestas3, 1, 44, 6)}) 
 
-        game.onTick(4000, "Oleada chopper", {=> chopperTraffic.generarChopper(chopper1 ,1, -4, 9)}) 
+        game.onTick(3000, "Oleada chopper", {=> chopperTraffic.generarChopper(chopper1 ,1, -4, 9)}) 
         game.onTick(9000, "Oleada chopper dos", {=> chopperTraffic.generarChopper(chopper2, 1, -4, 9)}) 
-        game.onTick(6000, "Oleada chopper tres", {=> chopperTraffic.generarChopper(chopper3, 1, -4, 9)})
+        // game.onTick(6000, "Oleada chopper tres", {=> chopperTraffic.generarChopper(chopper3, 1, -4, 9)})
 
-        game.onTick(4000, "Oleada bus", {=> busTraffic.generarBus(bus1 ,1, 44, 19)}) 
+        game.onTick(2000, "Oleada bus", {=> busTraffic.generarBus(bus1 ,1, 44, 19)}) 
         game.onTick(9000, "Oleada bus dos", {=> busTraffic.generarBus(bus2, 1, 44, 19)}) 
-        game.onTick(6000, "Oleada bus tres", {=> busTraffic.generarBus(bus3, 1, 44, 19)})
+        //game.onTick(6000, "Oleada bus tres", {=> busTraffic.generarBus(bus3, 1, 44, 19)})
 
-        game.onTick(250, "Mover autos", {=> carTraffic.moverAutos(autos1)})
-        game.onTick(250, "Mover autos", {=> carTraffic.moverAutos(autos2)})
-        game.onTick(250, "Mover autos", {=> carTraffic.moverAutos(autos3)})
+        game.onTick(100, "Mover autos", {=> carTraffic.moverAutos(autos1)})
+        game.onTick(100, "Mover autos", {=> carTraffic.moverAutos(autos2)})
+        // game.onTick(100, "Mover autos", {=> carTraffic.moverAutos(autos3)})
 
-        game.onTick(250, "Mover fiestas", {=> fiestaTraffic.moverAutos(fiestas1)})
-        game.onTick(250, "Mover fiestas", {=> fiestaTraffic.moverAutos(fiestas2)})
-        game.onTick(250, "Mover fiestas", {=> fiestaTraffic.moverAutos(fiestas3)})
+        game.onTick(100, "Mover fiestas", {=> fiestaTraffic.moverAutos(fiestas1)})
+        game.onTick(100, "Mover fiestas", {=> fiestaTraffic.moverAutos(fiestas2)})
+        // game.onTick(100, "Mover fiestas", {=> fiestaTraffic.moverAutos(fiestas3)})
 
-        game.onTick(250, "Mover chopperas", {=> chopperTraffic.moverChopper(chopper1)})
-        game.onTick(250, "Mover chopperas", {=> chopperTraffic.moverChopper(chopper2)})
-        game.onTick(250, "Mover chopperas", {=> chopperTraffic.moverChopper(chopper3)})
+        game.onTick(100, "Mover chopperas", {=> chopperTraffic.moverChopper(chopper1)})
+        game.onTick(100, "Mover chopperas", {=> chopperTraffic.moverChopper(chopper2)})
+        //game.onTick(100, "Mover chopperas", {=> chopperTraffic.moverChopper(chopper3)})
 
-        game.onTick(250, "Mover bus", {=> chopperTraffic.moverChopper(bus1)})
-        game.onTick(250, "Mover bus", {=> chopperTraffic.moverChopper(bus2)})
-        game.onTick(250, "Mover bus", {=> chopperTraffic.moverChopper(bus3)})
+        game.onTick(100, "Mover bus", {=> chopperTraffic.moverChopper(bus1)})
+        game.onTick(100, "Mover bus", {=> chopperTraffic.moverChopper(bus2)})
+        // game.onTick(100, "Mover bus", {=> chopperTraffic.moverChopper(bus3)})
     }
 
     method loseLevel() { 
