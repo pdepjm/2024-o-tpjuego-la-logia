@@ -1,5 +1,6 @@
 import estados.*
 import main.* 
+import personaje.*
 import escenarios.*
 import wollok.game.*
 
@@ -39,6 +40,10 @@ object fondoGameOver{
 	method image() = "gameOverBackground1.png"
 }
 
+object fondoWin{
+	var property position = game.at(0,0)
+	method image() = "win2.png"
+}
 //Objetos de niveles
 
 class Road {
@@ -73,31 +78,37 @@ class Moneda {
 
 	method chocasteCon(personaje) {
 		personaje.agarrarMoneda()
-		monedas.removerMoneda(self)
+		monedas.removerMonedas(self)
 	}
+
 }
 
 object monedas { 
-	var property monedas = []
+	var property listMonedas = []
+	var property position = game.at(0,0)
 
 	method generarMonedas(maxMonedas) {
-		if(monedas.size() < maxMonedas){
+		if(listMonedas.size() < maxMonedas){
 			const x = 0.randomUpTo(game.width()).truncate(0)
 			const y = 0.randomUpTo(game.height()).truncate(0)
-			const nuevaMoneda = new Moneda(position = game.at(x, y))
+			const nuevaMoneda = new Moneda(position = game.at(20, 0))
 			game.addVisual(nuevaMoneda)
-			monedas.add(nuevaMoneda)
+			listMonedas.add(nuevaMoneda)
 		}
 	}
 
-	method removerMoneda(moneda) {
-		monedas.remove(moneda)
-		game.removeVisual(moneda)		
+	method removerMonedas(moneda) {
+		listMonedas.remove(moneda)
+		game.removeVisual(moneda)
 	}
 
-	method removerTodasLasMonedas() {
-		monedas.forEach({z => game.removeVisual(z)})
-		monedas.clear()
+	method removerTodasMonedas() {
+		listMonedas.forEach({c => game.removeVisual(c)})
+		listMonedas.clear()
+	}
+
+	method monedasSuficientes() {
+		game.whenCollideDo(self, {algo => nivel1.winLevel()})
 	}
 }
 
