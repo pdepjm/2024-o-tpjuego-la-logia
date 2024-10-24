@@ -3,6 +3,8 @@ import main.*
 import escenarios.*
 import wollok.game.*
 
+
+//Elementos de pantalla de carga.
 object fondoPortada {
 	var property position = game.at(0, 0)
 	method image() = "Designer.jpeg"
@@ -22,14 +24,8 @@ object enter {
 	}
 
 	method borrarObjeto() {
-		position = game.at(10000, 10000)
+		game.removeTickEvent("actualizar enter")
 	}
-}
-
-
-object fondoGameOver{
-	var property position = game.at(0,0) 
-	method image() = "gameOverBackground1.png"
 }
 
 object fondoNivel1 {
@@ -37,6 +33,13 @@ object fondoNivel1 {
 	method image() = "background-Level1.png"
 	
 }
+
+object fondoGameOver{
+	var property position = game.at(0,0) 
+	method image() = "gameOverBackground1.png"
+}
+
+//Objetos de niveles
 
 class Road {
   	var property position
@@ -63,6 +66,41 @@ class Vehiculo {
 	method chocasteCon(personaje)
 	method moverse()
 }
+
+class Moneda {
+	var property position = game.at(0,0)
+	method image() = "coin2.png"
+
+	method chocasteCon(personaje) {
+		personaje.agarrarMoneda()
+		monedas.removerMoneda(self)
+	}
+}
+
+object monedas { 
+	var property monedas = []
+
+	method generarMonedas(maxMonedas) {
+		if(monedas.size() < maxMonedas){
+			const x = 0.randomUpTo(game.width()).truncate(0)
+			const y = 0.randomUpTo(game.height()).truncate(0)
+			const nuevaMoneda = new Moneda(position = game.at(x, y))
+			game.addVisual(nuevaMoneda)
+			monedas.add(nuevaMoneda)
+		}
+	}
+
+	method removerMoneda(moneda) {
+		monedas.remove(moneda)
+		game.removeVisual(moneda)		
+	}
+
+	method removerTodasLasMonedas() {
+		monedas.forEach({z => game.removeVisual(z)})
+		monedas.clear()
+	}
+}
+
 class Car inherits Vehiculo{
 
 	method image() = "PixelCar2.png"
@@ -82,7 +120,6 @@ class Car inherits Vehiculo{
         }
     }
 }
-
 
 class FiestaTuneado inherits Vehiculo {
 	method image() = "spr_rally_2.png"
@@ -140,6 +177,8 @@ class Colectivo inherits Vehiculo {
 		}
 	}
 }
+
+//Oleadas de vehiculos
 
 object carTraffic {
 	method generarAutos(fiestas, autosMax, x, y) {

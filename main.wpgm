@@ -9,10 +9,7 @@ program WollokRoad {
 	game.height(25)
 	game.width(44)
 	game.cellSize(40)
-
-	const portada = new Background()
-	escenario.iniciarNivel(portada) 
+	escenario.iniciarNivel(background) 
 
 	game.start()
 }
-
