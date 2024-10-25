@@ -89,9 +89,9 @@ object monedas {
 
 	method generarMonedas(maxMonedas) {
 		if(listMonedas.size() < maxMonedas){
-			const x = 0.randomUpTo(game.width()).truncate(0)
-			const y = 0.randomUpTo(game.height()).truncate(0)
-			const nuevaMoneda = new Moneda(position = game.at(20, 0))
+			const x = 0.randomUpTo(game.width()-1).truncate(0)
+			const y = 0.randomUpTo(game.height()-1).truncate(0)
+			const nuevaMoneda = new Moneda(position = game.at(x, y))
 			game.addVisual(nuevaMoneda)
 			listMonedas.add(nuevaMoneda)
 		}
@@ -105,10 +105,6 @@ object monedas {
 	method removerTodasMonedas() {
 		listMonedas.forEach({c => game.removeVisual(c)})
 		listMonedas.clear()
-	}
-
-	method monedasSuficientes() {
-		game.whenCollideDo(self, {algo => nivel1.winLevel()})
 	}
 }
 

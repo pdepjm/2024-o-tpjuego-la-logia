@@ -32,8 +32,7 @@ object escenario {
     }
 
     method removerNivel(){
-        if(nivel != null)
-            nivel.removerVisualEscenario()
+            nivel.removeObjects()
     }
 
     method morirToby(){
@@ -76,10 +75,6 @@ class Nivel {
         objetosExtra.forEach{o => o.visual()}
     }
 
-    method removerVisualEscenario() {
-        game.clear()
-    }
-        
     method removeObjects() {
         game.removeVisual(toby)
         objetos.forEach{o => game.removeVisual(o)}
@@ -121,8 +116,9 @@ class Nivel {
         chopper2.clear()
         bus1.clear()
         bus2.clear()
-        game.removeVisual(vida)
-        game.removeVisual(puntos)
+        game.removeVisual(barraVida)
+        game.removeVisual(barraPuntos)
+        monedas.removerTodasMonedas()
     }
 
     method configuracionFondo(){}
@@ -147,7 +143,6 @@ object background inherits Nivel {
     method pressEnter() {
         game.removeVisual(fondoPortada)
         enter.borrarObjeto()
-        self.removeObjects()
         game.removeVisual(enter)
         escenario.iniciarNivel(nivel1) // Inicia el nuevo nivel
     }
@@ -156,6 +151,11 @@ object background inherits Nivel {
 object win inherits Nivel{
     override method configuracionFondo() {
         game.addVisual(fondoWin)
+    }
+
+    override method configuracionInicial() {
+        self.removeObjects()
+        game.removeVisual(barraPuntos)
     }
 
     override method configuracionTeclado(){ 
@@ -170,6 +170,11 @@ object win inherits Nivel{
 }
 
 object gameover inherits Nivel { 
+    override method configuracionInicial() {
+        self.removeObjects()
+        game.removeVisual(barraPuntos)
+    }
+
     override method configuracionTeclado(){ 
         keyboard.enter().onPressDo { self.pressEnter() }
     }
@@ -180,6 +185,7 @@ object gameover inherits Nivel {
 
     method pressEnter() {
         game.removeVisual(fondoGameOver)
+        self.removeObjects()
         escenario.iniciarNivel(background) // Inicia el nuevo nivel
     }
 }
@@ -188,10 +194,23 @@ object nivel1 inherits Nivel {
     override method configuracionInicial(){	
         toby.position(20, 0)
 		game.addVisualCharacter(toby)
-        game.addVisual(puntos)
-        game.addVisual(vida)
+        game.addVisual(barraVida)
+        game.whenCollideDo(toby, {algo => self.actualizarBarraVida()})
+        game.whenCollideDo(monedas, {algo => self.actualizarBarraPoder()})
         game.onCollideDo(toby,{algo => algo.chocasteCon(toby) })
 	}
+
+    method actualizarBarraVida() {
+            toby.vidaPromedio()
+            game.removeVisual(barraVida)
+            game.addVisual(barraVida)
+    }
+
+    method actualizarBarraPoder() {
+            toby.puntoPromedio()
+            game.removeVisual(barraPuntos)
+            game.addVisual(barraPuntos)
+    }
 
     override method configuracionFondo() {
         game.addVisual(fondoNivel1)
@@ -212,7 +231,7 @@ object nivel1 inherits Nivel {
         objetos.add(new Road(position = game.at(0, 20)))
         objetos.add(new Road(position = game.at(0, 21)))
     
-        game.onTick(500, "Generar monedas", {=> monedas.generarMonedas(3)})
+        game.onTick(1000, "Generar monedas", {=> monedas.generarMonedas(3)})
     }
 
     override method instanciarObjetosExtra() {
@@ -254,19 +273,20 @@ object nivel1 inherits Nivel {
     method loseLevel() { 
         if(toby.perdio()) {
             self.removeObjects()
-            monedas.removerTodasMonedas()
             game.removeVisual(fondoNivel1)
+            toby.puntos(0)
+            toby.valorVida(100)
             escenario.iniciarNivel(gameover)
         }
     }
 
     method winLevel() {
-        if(toby.gano(150)) {
+        if(toby.gano(200)) {
             self.removeObjects()
-            monedas.removerTodasMonedas()
-            game.removeVisual(fondoNivel1) 
-            escenario.iniciarNivel(win)
+            game.removeVisual(fondoNivel1)
             toby.puntos(0)
+            toby.valorVida(100)
+            escenario.iniciarNivel(win)
         }
     }
 
@@ -275,7 +295,7 @@ object nivel1 inherits Nivel {
     }
 
     override method ganarNivel(){
-        monedas.monedasSuficientes()
+		game.whenCollideDo(monedas, {algo => self.winLevel()})
     }
 }
 

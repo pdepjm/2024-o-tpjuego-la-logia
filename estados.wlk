@@ -1,15 +1,14 @@
 import personaje.*
 
-object puntos {
+object barraPuntos {
 
-  method position() = game.at(42,23)
-  
-  method text() = "Puntos: " + toby.puntos()
+  var property position = game.at(37,23)
+
+  method image() = "power-bar-" + toby.barraPuntos() + ".png"
+
 }
+object barraVida {
+	var property position = game.at(37,24)
 
-object vida {
-
-  method position() = game.at(41,24)
-
-  method text() = "Vida: " + toby.valorVida().toString()
+	method image() = "health-bar-" + toby.barraVida() + ".png"
 }
