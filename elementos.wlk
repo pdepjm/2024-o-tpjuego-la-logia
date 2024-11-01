@@ -42,7 +42,7 @@ object fondoGameOver{
 
 object fondoWin{
 	var property position = game.at(0,0)
-	method image() = "win2.png"
+	method image() = "win3.png"
 }
 //Objetos de niveles
 
