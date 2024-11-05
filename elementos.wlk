@@ -108,35 +108,28 @@ object monedas {
 	}
 }
 
-class Car inherits Vehiculo{
+class Car inherits Vehiculo {
 	var imagen = "PixelCar2.png"
-	var tiempoChoque = 0
-	var choco = false
 	method image() = imagen
 
-    override method chocasteCon(personaje) {
+	override method chocasteCon(personaje) {
 		personaje.modificarVida(15)
 		imagen = "PixelCar2Crash.png"
-		choco = true
-		tiempoChoque = position.x()
-    }
+		game.schedule(500, {imagen = "PixelCar2Fire.png"})
+		game.schedule(1000, {imagen = null})
+	}
 
-    override method moverse() {
-        const x = position.x() + 1
-        const y = position.y()
-        if(choco){
-			if (position.x() - 5 == tiempoChoque) imagen = "PixelCar2Fire.png"
-			else if (position.x() - 10 == tiempoChoque) game.removeVisual(self)
-		}
-		if (x < game.width() + 1) {
-            position = game.at(x, y)
-        } else {
-            position = game.at(0, y)
+	override method moverse() {
+		const x = position.x() + 1
+		const y = position.y()
+
+		if (x < game.width() + 1) {		
+			position = game.at(x, y)
+		} else {
+			position = game.at(0, y)
 			imagen = "PixelCar2.png"
-			game.addVisual(self)
-			choco = false
-        }
-    }
+		}
+	}
 }
 
 class FiestaTuneado inherits Vehiculo {
@@ -199,33 +192,33 @@ class Colectivo inherits Vehiculo {
 //Oleadas de vehiculos
 
 object carTraffic {
-	method generarAutos(fiestas, autosMax, x, y) {
-		if(fiestas.size() < autosMax){
+	method generarAutos(autos, autosMax, x, y) {
+		if(autos.size() < autosMax){
 			const nuevoAuto = new Car(position = game.at(x, y))
 			game.addVisual(nuevoAuto)
-			fiestas.add(nuevoAuto)
+			autos.add(nuevoAuto)
+		}
+	}
+
+	method moverAutos(autos) {
+		if(autos.size() > 0){
+			autos.forEach({z => z.moverse()})
+		}
+	}
+}
+
+object fiestaTraffic {
+	method generarAutos(fiestas, autosMax, x, y) {
+		if(fiestas.size() < autosMax){
+			const nuevoFiesta = new FiestaTuneado(position = game.at(x, y))
+			game.addVisual(nuevoFiesta)
+			fiestas.add(nuevoFiesta)
 	}
 	}
 
 	method moverAutos(fiestas) {
 		if(fiestas.size() > 0){
 			fiestas.forEach({z => z.moverse()})
-		}
-	}
-}
-
-object fiestaTraffic {
-	method generarAutos(autos, autosMax, x, y) {
-		if(autos.size() < autosMax){
-			const nuevoAuto = new FiestaTuneado(position = game.at(x, y))
-			game.addVisual(nuevoAuto)
-			autos.add(nuevoAuto)
-	}
-	}
-
-	method moverAutos(autos) {
-		if(autos.size() > 0){
-			autos.forEach({z => z.moverse()})
 		}
 	}
 }
