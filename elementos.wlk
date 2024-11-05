@@ -109,21 +109,32 @@ object monedas {
 }
 
 class Car inherits Vehiculo{
-
-	method image() = "PixelCar2.png"
+	var imagen = "PixelCar2.png"
+	var tiempoChoque = 0
+	var choco = false
+	method image() = imagen
 
     override method chocasteCon(personaje) {
 		personaje.modificarVida(15)
+		imagen = "PixelCar2Crash.png"
+		choco = true
+		tiempoChoque = position.x()
     }
 
     override method moverse() {
         const x = position.x() + 1
         const y = position.y()
-        
-        if (x < game.width() + 1) {
+        if(choco){
+			if (position.x() - 5 == tiempoChoque) imagen = "PixelCar2Fire.png"
+			else if (position.x() - 10 == tiempoChoque) game.removeVisual(self)
+		}
+		if (x < game.width() + 1) {
             position = game.at(x, y)
         } else {
             position = game.at(0, y)
+			imagen = "PixelCar2.png"
+			game.addVisual(self)
+			choco = false
         }
     }
 }
