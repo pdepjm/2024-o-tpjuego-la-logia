@@ -153,6 +153,7 @@ class Nivel {
 object background inherits Nivel {
     override method configuracionTeclado() {
         keyboard.enter().onPressDo { self.pressEnter()}
+        keyboard.m().onPressDo { self.pressM()}
     }
 
     override method configuracionFondo() {
@@ -169,6 +170,37 @@ object background inherits Nivel {
         game.removeVisual(wasd)
         escenario.iniciarNivel(nivel1) // Inicia el nuevo nivel
     }
+
+    method pressM() { 
+        game.removeVisual(fondoPortada)
+        wasd.borrarObjeto()
+        enter.borrarObjeto()
+        game.removeVisual(enter)
+        game.removeVisual(wasd)
+        escenario.iniciarNivel(selectSkin)
+    }
+}
+
+object selectSkin inherits Nivel {
+    override method configuracionTeclado() {
+        keyboard.num(1).onPressDo {self.selectedCharacter() toby.whichSkin(1)}
+        keyboard.num(2).onPressDo {self.selectedCharacter() toby.whichSkin(2)}
+        keyboard.num(3).onPressDo {self.selectedCharacter() toby.whichSkin(3)}
+        keyboard.enter().onPressDo {self.pressEnter()}
+    }
+
+    override method configuracionFondo() {
+        game.addVisual(fondoSeleccionSkin)
+        fondoSeleccionSkin.positionSkins()
+    }
+
+    method selectedCharacter() {
+        game.removeVisual(fondoSeleccionSkin)
+        fondoSeleccionSkin.borrarObjetos()
+        escenario.iniciarNivel(background)
+    }
+
+    method pressEnter(){}
 }
 
 object win inherits Nivel{

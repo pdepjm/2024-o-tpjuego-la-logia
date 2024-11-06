@@ -57,6 +57,69 @@ object wasd {
 	}
 }
 
+object fondoSeleccionSkin {
+	var property position = game.at(0, 0)
+	method image() = "skyblueBackground2.png"	
+
+	const skin1 = new Skins(imagen = "character1-front.png", position = game.at(5, 13))
+	const skin2 = new Skins(imagen = "character2-front.png", position = game.at(20, 13))
+	const skin3 = new Skins(imagen = "character3-front.png", position = game.at(34, 13))
+
+	method positionSkins() {
+		skin1.rotateSkin("characterA-")
+		skin2.rotateSkin("characterB-")
+		skin3.rotateSkin("characterC-")
+	}
+
+	method borrarObjetos() {
+		skin1.removeTick()
+		skin2.removeTick()
+		skin3.removeTick()
+		game.removeVisual(skin1)
+		game.removeVisual(skin2)
+		game.removeVisual(skin3)
+	}
+}
+
+class Skins {
+	var property position = game.at(0,0)
+	var property facing = 1
+	var property imagen
+	method image() = imagen
+
+	method rotateSkin(image) {
+		game.onTick(800, "rotar skin" ,{self.actualizarImagen(image)})
+	}
+
+	method actualizarImagen(image) {
+		if(facing == 1){
+			imagen = image + "front.png"
+			game.removeVisual(self)
+			game.addVisual(self)
+			facing = 2
+		} else if(facing == 2){
+			imagen = image + "left.png"
+			game.removeVisual(self)
+			game.addVisual(self)
+			facing = 3
+		} else if(facing == 3){
+			imagen = image + "back.png"
+			game.removeVisual(self)
+			game.addVisual(self)
+			facing = 4
+		}else if(facing == 4){
+			imagen = image + "right.png"
+			game.removeVisual(self)
+			game.addVisual(self)
+			facing = 1
+		}
+	}
+
+	method removeTick() {
+		game.removeTickEvent("rotar skin")
+	}
+}
+
 object fondoNivel1 {
 	var property position = game.at(0, 0)
 	method image() = "background-Level1.png"
