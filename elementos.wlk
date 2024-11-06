@@ -78,6 +78,8 @@ class Road {
   	var property position
   	method image() = "road1.png"
   	method visual() = game.addVisual(self)
+
+	method chocasteCon(personaje) {}
 }
 
 class Tree {
@@ -89,6 +91,31 @@ class Tree {
   
   	method chocasteCon(personaje) {
 	}
+}
+
+object blood {
+	var property position = game.at(0,0)
+	var property imagen = "blood1.png"
+	method image() = imagen
+
+	method afterCrash(x,y) {
+		if(toby.valorVida()>0){
+			game.addVisual(self)
+			position = game.at(x,y)
+			imagen = "blood2.png"
+			game.schedule(600, {self.addRemove()})
+			game.schedule(601, {imagen = "blood3.png"})
+			game.schedule(602,{self.addRemove()})
+			game.schedule(850, {game.removeVisual(self)})
+		}
+	}
+
+	method addRemove(){
+		game.removeVisual(self)
+		game.addVisual(self)
+	}
+
+	method chocasteCon(personaje) {}
 }
 
 class Vehiculo {
@@ -146,6 +173,7 @@ class Car inherits Vehiculo {
 		imagen = "PixelCar2Crash.png"
 		game.schedule(500, {imagen = "PixelCar2Fire.png"})
 		game.schedule(1000, {imagen = null})
+		blood.afterCrash(position.x(), position.y())
 	}
 
 	override method moverse() {
@@ -162,11 +190,16 @@ class Car inherits Vehiculo {
 }
 
 class FiestaTuneado inherits Vehiculo {
-	method image() = "spr_rally_2.png"
+	var property imagen = "spr_rally_2.png"
+	method image() = imagen
 
   	override method chocasteCon(personaje) {
 		personaje.modificarVida(20)
 		personaje.restarVida(2)
+		imagen = "spr_rally_2Crash.png"
+		game.schedule(500, {imagen = "spr_rally_2Fire.png"})
+		game.schedule(1000, {imagen = null})
+		blood.afterCrash(position.x(), position.y())
 	}
 
 	override method moverse() {
@@ -182,11 +215,16 @@ class FiestaTuneado inherits Vehiculo {
 }
 
 class Chopperita inherits Vehiculo {
-	method image() = "spr_chopper_2.png"
+	var property imagen = "spr_chopper_2.png"
+	method image() = imagen
   
   	override method chocasteCon(personaje) {
 		personaje.modificarVida(10)
 		personaje.restarVida(1)
+		imagen = "spr_chopper_2Crash.png"
+		game.schedule(500, {imagen = "spr_chopper_2Fire.png"})
+		game.schedule(1000, {imagen = null})
+		blood.afterCrash(position.x(), position.y())
 	}
 
 	override method moverse() {
@@ -202,11 +240,16 @@ class Chopperita inherits Vehiculo {
 }
 
 class Colectivo inherits Vehiculo {
-	method image() = "double decker2.png"
+	var property imagen = "double decker2.png" 
+	method image() = imagen
   
   	override method chocasteCon(personaje) {
 		personaje.modificarVida(30)
 		personaje.restarVida(3)
+		imagen = "double decker2Crash.png"
+		game.schedule(500, {imagen = "double decker2Fire.png"})
+		game.schedule(1000, {imagen = null})
+		blood.afterCrash(position.x(), position.y())
 	}
 
 	override method moverse() {

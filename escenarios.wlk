@@ -51,10 +51,12 @@ class Nivel {
     var property objetosExtra = []
     var property autos1 = []
     var property autos2 = []
+    var property autos3 = []
     var property fiestas1 = []
     var property fiestas2 = []
     var property chopper1 = []
     var property chopper2 = []
+    var property chopper3 = []
     var property bus1 = []
     var property bus2 = []
 
@@ -81,10 +83,12 @@ class Nivel {
         objetosExtra.forEach{o => game.removeVisual(o)}
         autos1.forEach{a => game.removeVisual(a)}
         autos2.forEach{a => game.removeVisual(a)}
+        autos3.forEach{a => game.removeVisual(a)}
         fiestas1.forEach{a => game.removeVisual(a)}
         fiestas2.forEach{a => game.removeVisual(a)}
         chopper1.forEach{a => game.removeVisual(a)}
         chopper2.forEach{a => game.removeVisual(a)}
+        chopper3.forEach{a => game.removeVisual(a)}
         bus1.forEach{a => game.removeVisual(a)}
         bus2.forEach{a => game.removeVisual(a)}
         game.removeTickEvent("Oleada autos 1")
@@ -99,10 +103,12 @@ class Nivel {
         game.removeTickEvent("Oleada bus 2")
         game.removeTickEvent("Mover autos 1")
         game.removeTickEvent("Mover autos 2")
+        game.removeTickEvent("Mover autos 3")
         game.removeTickEvent("Mover fiestas 1")
         game.removeTickEvent("Mover fiestas 2")
         game.removeTickEvent("Mover chopperas 1")
         game.removeTickEvent("Mover chopperas 2")
+        game.removeTickEvent("Mover chopperas 3")
         game.removeTickEvent("Mover bus 1")
         game.removeTickEvent("Mover bus 2")
         game.removeTickEvent("Generar monedas")
@@ -253,23 +259,31 @@ object nivel1 inherits Nivel {
         game.onTick(4500, "Oleada autos 3", {=> carTraffic.generarAutos(autos1,2, -4, 4)}) 
         game.onTick(1900, "Oleada autos 4", {=> carTraffic.generarAutos(autos2, 2, -4, 4)})
 
+        game.onTick(4500, "Oleada autos 5", {=> carTraffic.generarAutos(autos3, 2, -4, 20)})
+        game.onTick(1900, "Oleada autos 6", {=> carTraffic.generarAutos(autos3, 2, -4, 20)})
+
         game.onTick(4000, "Oleada fiesta 1", {=> fiestaTraffic.generarAutos(fiestas1, 1, 44, 6)}) 
         game.onTick(10000, "Oleada fiesta 2", {=> fiestaTraffic.generarAutos(fiestas2, 1, 44, 6)}) 
 
         game.onTick(3000, "Oleada chopper 1", {=> chopperTraffic.generarChopper(chopper1 ,1, -4, 9)}) 
         game.onTick(9000, "Oleada chopper 2", {=> chopperTraffic.generarChopper(chopper2, 1, -4, 9)}) 
 
+        game.onTick(3000, "Oleada chopper 3", {=> chopperTraffic.generarChopper(chopper3, 1, -4, 21)}) 
+        game.onTick(9000, "Oleada chopper 4", {=> chopperTraffic.generarChopper(chopper3, 1, -4, 21)}) 
+
         game.onTick(2000, "Oleada bus 1", {=> busTraffic.generarBus(bus1 ,1, 44, 19)}) 
         game.onTick(9000, "Oleada bus 2", {=> busTraffic.generarBus(bus2, 1, 44, 19)}) 
 
         game.onTick(100, "Mover autos 1", {=> carTraffic.moverAutos(autos1)})
         game.onTick(100, "Mover autos 2", {=> carTraffic.moverAutos(autos2)})
+        game.onTick(100, "Mover autos 3", {=> carTraffic.moverAutos(autos3)})
 
         game.onTick(100, "Mover fiestas 1", {=> fiestaTraffic.moverAutos(fiestas1)})
         game.onTick(100, "Mover fiestas 2", {=> fiestaTraffic.moverAutos(fiestas2)})
 
         game.onTick(100, "Mover chopperas 1", {=> chopperTraffic.moverChopper(chopper1)})
         game.onTick(100, "Mover chopperas 2", {=> chopperTraffic.moverChopper(chopper2)})
+        game.onTick(100, "Mover chopperas 3", {=> chopperTraffic.moverChopper(chopper3)})
 
         game.onTick(100, "Mover bus 1", {=> chopperTraffic.moverChopper(bus1)})
         game.onTick(100, "Mover bus 2", {=> chopperTraffic.moverChopper(bus2)})
