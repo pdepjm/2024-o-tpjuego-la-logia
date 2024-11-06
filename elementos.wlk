@@ -141,7 +141,8 @@ class Car inherits Vehiculo {
 	method image() = imagen
 
 	override method chocasteCon(personaje) {
-		personaje.modificarVida(15)
+		personaje.modificarVida(20)
+		personaje.restarVida(2)
 		imagen = "PixelCar2Crash.png"
 		game.schedule(500, {imagen = "PixelCar2Fire.png"})
 		game.schedule(1000, {imagen = null})
@@ -164,7 +165,8 @@ class FiestaTuneado inherits Vehiculo {
 	method image() = "spr_rally_2.png"
 
   	override method chocasteCon(personaje) {
-		personaje.modificarVida(15)
+		personaje.modificarVida(20)
+		personaje.restarVida(2)
 	}
 
 	override method moverse() {
@@ -184,6 +186,7 @@ class Chopperita inherits Vehiculo {
   
   	override method chocasteCon(personaje) {
 		personaje.modificarVida(10)
+		personaje.restarVida(1)
 	}
 
 	override method moverse() {
@@ -203,6 +206,7 @@ class Colectivo inherits Vehiculo {
   
   	override method chocasteCon(personaje) {
 		personaje.modificarVida(30)
+		personaje.restarVida(3)
 	}
 
 	override method moverse() {

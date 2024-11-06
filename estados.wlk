@@ -9,5 +9,5 @@ object barraPuntos {
 object barraVida {
 	var property position = game.at(37,24)
 
-	method image() = toby.barraVida()
+	method image() = "health-bar-" + toby.vidaRestante() + ".png"
 }
