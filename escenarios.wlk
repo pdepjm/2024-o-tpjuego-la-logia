@@ -304,4 +304,73 @@ object nivel1 inherits Nivel {
     }
 }
 
-object nivel2 inherits Nivel{}
+object nivel2 inherits Nivel{
+    override method configuracionInicial(){	
+        toby.position(20, 0)
+		game.addVisualCharacter(toby)
+        game.addVisual(barraVida)
+        game.addVisual(barraPuntos)
+        game.whenCollideDo(toby, {algo => self.actualizarBarras()})
+        game.onCollideDo(toby,{algo => algo.chocasteCon(toby) })
+	}
+
+    override method configuracionFondo() {
+        game.addVisual(fondoNivel2)
+    }
+
+    override method instanciarObjetos() {
+        objetos.add(new Road(position = game.at(0, 3)))
+        objetos.add(new Road(position = game.at(0, 4)))
+        objetos.add(new Road(position = game.at(0, 6)))
+        objetos.add(new Road(position = game.at(0, 7)))
+        objetos.add(new Road(position = game.at(0, 9)))
+        objetos.add(new Road(position = game.at(0, 10)))
+        objetos.add(new Road(position = game.at(0, 11)))
+        objetos.add(new Road(position = game.at(0, 13)))
+        objetos.add(new Road(position = game.at(0, 15)))
+        objetos.add(new Road(position = game.at(0, 16)))
+        objetos.add(new Road(position = game.at(0, 18)))
+        objetos.add(new Road(position = game.at(0, 19)))
+        objetos.add(new Road(position = game.at(0, 20)))
+    
+        game.onTick(1000, "Generar monedas", {=> monedas.generarMonedas(3)})
+    }
+
+    override method configuracionVehiculos() {        
+        // Configuramos las oleadas para que coincidan con las posiciones de los caminos
+        game.onTick(3000, "Oleada autos n1", {=> carTraffic.generarAutos(autos1, 2, -4, 3)}) 
+        game.onTick(1000, "Oleada autos n2", {=> carTraffic.generarAutos(autos2, 2, -4, 4)})
+
+        game.onTick(4500, "Oleada autos n3", {=> carTraffic.generarAutos(autos1, 2, -4, 6)}) 
+        game.onTick(1900, "Oleada autos n4", {=> carTraffic.generarAutos(autos2, 2, -4, 7)})
+
+        game.onTick(4000, "Oleada fiesta n1", {=> fiestaTraffic.generarAutos(fiestas1, 1, 44, 9)}) 
+        game.onTick(10000, "Oleada fiesta n2", {=> fiestaTraffic.generarAutos(fiestas2, 1, 44, 10)}) 
+
+        game.onTick(3000, "Oleada chopper n1", {=> chopperTraffic.generarChopper(chopper1, 1, -4, 11)}) 
+        game.onTick(9000, "Oleada chopper n2", {=> chopperTraffic.generarChopper(chopper2, 1, -4, 13)}) 
+
+        game.onTick(2000, "Oleada bus n1", {=> busTraffic.generarBus(bus1, 1, 44, 15)}) 
+        game.onTick(9000, "Oleada bus n2", {=> busTraffic.generarBus(bus2, 1, 44, 16)}) 
+
+        game.onTick(100, "Mover autos 1", {=> carTraffic.moverAutos(autos1)})
+        game.onTick(100, "Mover autos 2", {=> carTraffic.moverAutos(autos2)})
+
+        game.onTick(100, "Mover fiestas 1", {=> fiestaTraffic.moverAutos(fiestas1)})
+        game.onTick(100, "Mover fiestas 2", {=> fiestaTraffic.moverAutos(fiestas2)})
+
+        game.onTick(100, "Mover chopperas 1", {=> chopperTraffic.moverChopper(chopper1)})
+        game.onTick(100, "Mover chopperas 2", {=> chopperTraffic.moverChopper(chopper2)})
+
+        game.onTick(100, "Mover bus 1", {=> chopperTraffic.moverChopper(bus1)})
+        game.onTick(100, "Mover bus 2", {=> chopperTraffic.moverChopper(bus2)})
+    }
+
+    override method finalizarNivel() {
+        game.whenCollideDo(toby, {algo => self.loseLevel()})
+    }
+
+    override method ganarNivel() {
+        game.whenCollideDo(monedas, {algo => self.winLevel()})
+    }
+}
