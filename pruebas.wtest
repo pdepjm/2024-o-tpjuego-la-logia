@@ -10,4 +10,51 @@ describe "Test de personaje" {
     auto.chocasteCon(toby)
     assert.that(toby.valorVida() < 100)
   }
+
+  test "Personaje llega a 200 puntos y gana."{
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    
+    assert.that(toby.gano(200))
+  }
+
+  test "Personaje colisiona con colectivo y pierde 30 de vida" {
+    const colectivo = new Colectivo()
+    colectivo.chocasteCon(toby)
+    assert.that(toby.valorVida() == 70)
+  }
+
+test "Personaje colisiona con una moto, agarra una moneda y puede seguir jugando." { 
+  const moto = new Chopperita()
+  moto.chocasteCon(toby)
+  toby.agarrarMoneda()
+  assert.that(toby.valorVida() > 0) 
+  }
+
+test "Personaje tiene 0 de vida y pierde el juego." {
+  const colectivo = new Colectivo()
+  const moto = new Chopperita()
+    colectivo.chocasteCon(toby)
+    colectivo.chocasteCon(toby)
+    colectivo.chocasteCon(toby)
+    moto.chocasteCon(toby)
+    assert.that(toby.perdio())
+  }
+}
+
+describe "Test de vehiculo" {
+  test "Auto colisiona y sale humo." {
+    const auto = new Car()
+    auto.chocasteCon(toby)
+    assert.that(toby.valorVida() < 100)
+    assert.that(auto.image() == "PixelCar2Crash.png") // ?
+  }
 }

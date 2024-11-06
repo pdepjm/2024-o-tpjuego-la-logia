@@ -10,13 +10,22 @@ object toby {
     var vidaRestante = 1
     var property barraVida = null
     var property direction = "back"
-
-    
+    var property character = "character1-"
     method position(x, y) {
         position = game.at(x, y)
     } 
     
-    method image() = "characterr-"+self.direction() +".png"
+    method image() = character+ self.direction()+".png"
+        
+    method whichSkin(num){
+        if(num == 1){
+            character = "character1-"
+        }else if(num == 2){ 
+            character = "character2-"
+        }else if(num == 3){
+            character = "character3-"
+        }
+    }
 
     method moverArriba() {
         if (position.y() < minY) { // Solo moverse si no supera el borde superior
@@ -35,7 +44,7 @@ object toby {
     method moverDerecha() {
         if (position.x() < maxX) { // Solo moverse si no supera el borde derecho
             position = position.right(1)
-            direction = "rigth" //Se me patino la th
+            direction = "right" 
         }
     }
 

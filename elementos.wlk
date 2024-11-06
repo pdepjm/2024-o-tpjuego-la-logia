@@ -57,6 +57,69 @@ object wasd {
 	}
 }
 
+object fondoSeleccionSkin {
+	var property position = game.at(0, 0)
+	method image() = "skyblueBackground2.png"	
+
+	const skin1 = new Skins(imagen = "character1-front.png", position = game.at(5, 13))
+	const skin2 = new Skins(imagen = "character2-front.png", position = game.at(20, 13))
+	const skin3 = new Skins(imagen = "character3-front.png", position = game.at(34, 13))
+
+	method positionSkins() {
+		skin1.rotateSkin("characterA-")
+		skin2.rotateSkin("characterB-")
+		skin3.rotateSkin("characterC-")
+	}
+
+	method borrarObjetos() {
+		skin1.removeTick()
+		skin2.removeTick()
+		skin3.removeTick()
+		game.removeVisual(skin1)
+		game.removeVisual(skin2)
+		game.removeVisual(skin3)
+	}
+}
+
+class Skins {
+	var property position = game.at(0,0)
+	var property facing = 1
+	var property imagen
+	method image() = imagen
+
+	method rotateSkin(image) {
+		game.onTick(800, "rotar skin" ,{self.actualizarImagen(image)})
+	}
+
+	method actualizarImagen(image) {
+		if(facing == 1){
+			imagen = image + "front.png"
+			game.removeVisual(self)
+			game.addVisual(self)
+			facing = 2
+		} else if(facing == 2){
+			imagen = image + "left.png"
+			game.removeVisual(self)
+			game.addVisual(self)
+			facing = 3
+		} else if(facing == 3){
+			imagen = image + "back.png"
+			game.removeVisual(self)
+			game.addVisual(self)
+			facing = 4
+		}else if(facing == 4){
+			imagen = image + "right.png"
+			game.removeVisual(self)
+			game.addVisual(self)
+			facing = 1
+		}
+	}
+
+	method removeTick() {
+		game.removeTickEvent("rotar skin")
+	}
+}
+
 object fondoNivel1 {
 	var property position = game.at(0, 0)
 	method image() = "background-Level1.png"
@@ -78,6 +141,8 @@ class Road {
   	var property position
   	method image() = "road1.png"
   	method visual() = game.addVisual(self)
+
+	method chocasteCon(personaje) {}
 }
 
 class Tree {
@@ -89,6 +154,31 @@ class Tree {
   
   	method chocasteCon(personaje) {
 	}
+}
+
+object blood {
+	var property position = game.at(0,0)
+	var property imagen = "blood1.png"
+	method image() = imagen
+
+	method afterCrash(x,y) {
+		if(toby.valorVida()>0){
+			game.addVisual(self)
+			position = game.at(x,y)
+			imagen = "blood2.png"
+			game.schedule(600, {self.addRemove()})
+			game.schedule(601, {imagen = "blood3.png"})
+			game.schedule(602,{self.addRemove()})
+			game.schedule(850, {game.removeVisual(self)})
+		}
+	}
+
+	method addRemove(){
+		game.removeVisual(self)
+		game.addVisual(self)
+	}
+
+	method chocasteCon(personaje) {}
 }
 
 class Vehiculo {
@@ -146,6 +236,7 @@ class Car inherits Vehiculo {
 		imagen = "PixelCar2Crash.png"
 		game.schedule(500, {imagen = "PixelCar2Fire.png"})
 		game.schedule(1000, {imagen = null})
+		blood.afterCrash(position.x(), position.y())
 	}
 
 	override method moverse() {
@@ -162,11 +253,16 @@ class Car inherits Vehiculo {
 }
 
 class FiestaTuneado inherits Vehiculo {
-	method image() = "spr_rally_2.png"
+	var property imagen = "spr_rally_2.png"
+	method image() = imagen
 
   	override method chocasteCon(personaje) {
 		personaje.modificarVida(20)
 		personaje.restarVida(2)
+		imagen = "spr_rally_2Crash.png"
+		game.schedule(500, {imagen = "spr_rally_2Fire.png"})
+		game.schedule(1000, {imagen = null})
+		blood.afterCrash(position.x(), position.y())
 	}
 
 	override method moverse() {
@@ -182,11 +278,16 @@ class FiestaTuneado inherits Vehiculo {
 }
 
 class Chopperita inherits Vehiculo {
-	method image() = "spr_chopper_2.png"
+	var property imagen = "spr_chopper_2.png"
+	method image() = imagen
   
   	override method chocasteCon(personaje) {
 		personaje.modificarVida(10)
 		personaje.restarVida(1)
+		imagen = "spr_chopper_2Crash.png"
+		game.schedule(500, {imagen = "spr_chopper_2Fire.png"})
+		game.schedule(1000, {imagen = null})
+		blood.afterCrash(position.x(), position.y())
 	}
 
 	override method moverse() {
@@ -202,11 +303,16 @@ class Chopperita inherits Vehiculo {
 }
 
 class Colectivo inherits Vehiculo {
-	method image() = "double decker2.png"
+	var property imagen = "double decker2.png" 
+	method image() = imagen
   
   	override method chocasteCon(personaje) {
 		personaje.modificarVida(30)
 		personaje.restarVida(3)
+		imagen = "double decker2Crash.png"
+		game.schedule(500, {imagen = "double decker2Fire.png"})
+		game.schedule(1000, {imagen = null})
+		blood.afterCrash(position.x(), position.y())
 	}
 
 	override method moverse() {
