@@ -127,7 +127,6 @@ class Nivel {
     }
 
     method actualizarBarraVida() {
-            toby.vidaPromedio()
             game.removeVisual(barraVida)
             game.addVisual(barraVida)
     }
@@ -152,14 +151,16 @@ object background inherits Nivel {
 
     override method configuracionFondo() {
         game.addVisual(fondoPortada)
-        enter.actualizarEnter()
         wasd.actualizarWASD()
+        enter.actualizarEnter()
     }
 
     method pressEnter() {
         game.removeVisual(fondoPortada)
+        wasd.borrarObjeto()
         enter.borrarObjeto()
         game.removeVisual(enter)
+        game.removeVisual(wasd)
         escenario.iniciarNivel(nivel1) // Inicia el nuevo nivel
     }
 }

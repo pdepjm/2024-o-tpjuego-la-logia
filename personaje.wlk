@@ -7,6 +7,7 @@ object toby {
     var property valorVida = 100
     var property puntos = 0
     var monedasRestantes = 1
+    var vidaRestante = 1
     var property barraVida = null
     var property direction = "back"
 
@@ -60,32 +61,10 @@ object toby {
         monedasRestantes += 1
     }
 
-    method monedasRestantes() = monedasRestantes
-
-    method vidaPromedio() {
-        if(valorVida >= 100){
-            barraVida = "health-bar-1.png"
-        }
-        else if(valorVida >= 90 and valorVida < 100){
-            barraVida = "health-bar-2.png"
-        } else if(valorVida >= 80 and valorVida < 90){
-            barraVida = "health-bar-3.png"
-        } else if(valorVida >= 70 and valorVida < 80){
-            barraVida = "health-bar-4.png"
-        } else if(valorVida >= 60 and valorVida < 70){
-            barraVida = "health-bar-5.png"
-        } else if(valorVida >= 50 and valorVida < 60){
-            barraVida = "health-bar-6.png"
-        } else if(valorVida >= 40 and valorVida < 50){
-            barraVida = "health-bar-7.png"
-        } else if(valorVida >= 30 and valorVida < 40){
-            barraVida = "health-bar-8.png"
-        } else if(valorVida >= 20 and valorVida < 30){
-            barraVida = "health-bar-9.png"
-        } else if(valorVida >= 10 and valorVida < 20){
-            barraVida = "health-bar-10.png"
-        } else if(valorVida >= 0 and valorVida < 10){
-            barraVida = "health-bar-11.png"
-        }
+    method restarVida(valor){
+        vidaRestante += valor
     }
+
+    method monedasRestantes() = monedasRestantes
+    method vidaRestante() = vidaRestante
 }

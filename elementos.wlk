@@ -30,23 +30,28 @@ object enter {
 }
 
 object wasd {
-	var property position = game.at(30,-3)
-	var property imagen = "white-wasd.png"
+	var property position = game.at(2,2)
+
+	var property imagen = "black-wasd2.png"
+
 	method image() = imagen
 
 	method actualizarWASD() {
 			game.onTick(500, "actualizar wasd", { => self.visual()})
 	}
 
-	method visual() {
-		if(imagen == "white-wasd.png") {
-			imagen = "black-wasd.png"
-		}else {imagen = "white-wasd.png"}
-		if(game.hasVisual(self)){
-			game.removeVisual(self) 
-		}else{game.addVisual(self)}
+	method visual(){
+		if(imagen == "black-wasd2.png"){
+			game.removeVisual(self)
+			imagen = "white-wasd2.png"
+			game.addVisual(self)
+		} else {
+			game.removeVisual(self)
+			imagen = "black-wasd2.png"
+			game.addVisual(self)
+		}
 	}
-
+	
 	method borrarObjeto() {
 		game.removeTickEvent("actualizar wasd")
 	}
