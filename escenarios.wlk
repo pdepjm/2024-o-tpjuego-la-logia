@@ -121,6 +121,22 @@ class Nivel {
         monedas.removerTodasMonedas()
     }
 
+    method actualizarBarras(){
+        self.actualizarBarraVida()
+        self.actualizarBarraPoder()
+    }
+
+    method actualizarBarraVida() {
+            toby.vidaPromedio()
+            game.removeVisual(barraVida)
+            game.addVisual(barraVida)
+    }
+
+    method actualizarBarraPoder() {
+            game.removeVisual(barraPuntos)
+            game.addVisual(barraPuntos)
+    }
+
     method configuracionFondo(){}
     method instanciarObjetos(){}
     method instanciarObjetosExtra(){}
@@ -136,8 +152,8 @@ object background inherits Nivel {
 
     override method configuracionFondo() {
         game.addVisual(fondoPortada)
-        enter.borrarObjeto()
         enter.actualizarEnter()
+        wasd.actualizarWASD()
     }
 
     method pressEnter() {
@@ -195,22 +211,10 @@ object nivel1 inherits Nivel {
         toby.position(20, 0)
 		game.addVisualCharacter(toby)
         game.addVisual(barraVida)
-        game.whenCollideDo(toby, {algo => self.actualizarBarraVida()})
-        game.whenCollideDo(monedas, {algo => self.actualizarBarraPoder()})
+        game.addVisual(barraPuntos)
+        game.whenCollideDo(toby, {algo => self.actualizarBarras()})
         game.onCollideDo(toby,{algo => algo.chocasteCon(toby) })
 	}
-
-    method actualizarBarraVida() {
-            toby.vidaPromedio()
-            game.removeVisual(barraVida)
-            game.addVisual(barraVida)
-    }
-
-    method actualizarBarraPoder() {
-            toby.puntoPromedio()
-            game.removeVisual(barraPuntos)
-            game.addVisual(barraPuntos)
-    }
 
     override method configuracionFondo() {
         game.addVisual(fondoNivel1)

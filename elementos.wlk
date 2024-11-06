@@ -29,6 +29,29 @@ object enter {
 	}
 }
 
+object wasd {
+	var property position = game.at(30,-3)
+	var property imagen = "white-wasd.png"
+	method image() = imagen
+
+	method actualizarWASD() {
+			game.onTick(500, "actualizar wasd", { => self.visual()})
+	}
+
+	method visual() {
+		if(imagen == "white-wasd.png") {
+			imagen = "black-wasd.png"
+		}else {imagen = "white-wasd.png"}
+		if(game.hasVisual(self)){
+			game.removeVisual(self) 
+		}else{game.addVisual(self)}
+	}
+
+	method borrarObjeto() {
+		game.removeTickEvent("actualizar wasd")
+	}
+}
+
 object fondoNivel1 {
 	var property position = game.at(0, 0)
 	method image() = "background-Level1.png"
@@ -79,8 +102,8 @@ class Moneda {
 	method chocasteCon(personaje) {
 		personaje.agarrarMoneda()
 		monedas.removerMonedas(self)
+		toby.obtenerMoneda()
 	}
-
 }
 
 object monedas { 
