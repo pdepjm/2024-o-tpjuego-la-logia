@@ -1,16 +1,17 @@
 import wollok.game.*
+import wollok.lang.*
+import escenarios.*
+import elementos.*
+import personaje.*
 
-import pepita.*
-
-program PepitaGame {
-	game.title("Pepita")
-	game.height(10)
-	game.width(10)
-	game.cellSize(100)
-
-	game.addVisual(pepita)
-
-	keyboard.w().onPressDo({ pepita.fly(1) })
-
+program WollokRoad {
+	game.title("Wollok Road")
+	game.height(25)
+	game.width(44)
+	game.cellSize(40)
+	escenario.iniciarNivel(background) 
+	game.whenCollideDo(toby, {algo => escenario.nivel().actualizarBarras()})
+        
+        game.onCollideDo(toby,{algo => algo.chocasteCon(toby) })
 	game.start()
 }

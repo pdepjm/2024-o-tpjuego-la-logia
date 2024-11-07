@@ -1,9 +1,50 @@
-import pepita.*
+import elementos.*
+import personaje.*
+import escenarios.*
+import estados.*
+import main.*
 
-describe "group of tests for pepita" {
-
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+describe "Test de personaje" {
+  test "Personaje colisiona y pierde vida." {
+    const auto = new Car()
+    auto.chocasteCon(toby)
+    assert.that(toby.valorVida() < 100)
   }
 
+  test "Personaje llega a 200 puntos y gana."{
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    toby.agarrarMoneda()
+    
+    assert.that(toby.gano(200))
+  }
+
+  test "Personaje colisiona con colectivo y pierde 30 de vida" {
+    const colectivo = new Colectivo()
+    colectivo.chocasteCon(toby)
+    assert.that(toby.valorVida() == 70)
+  }
+
+test "Personaje colisiona con una moto, agarra una moneda y puede seguir jugando." { 
+  const moto = new Chopperita()
+  moto.chocasteCon(toby)
+  toby.agarrarMoneda()
+  assert.that(toby.valorVida() > 0) 
+  }
+}
+
+describe "Test de vehiculo" {
+  test "Auto colisiona y sale humo." {
+    const auto = new Car()
+    auto.chocasteCon(toby)
+    assert.that(toby.valorVida() < 100)
+    assert.that(auto.image() == "PixelCar2Crash.png") // ?
+  }
 }
