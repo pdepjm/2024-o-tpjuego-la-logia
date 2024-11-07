@@ -7,7 +7,7 @@ object toby {
     var valorVida = 100
     var property puntos = 0
     var monedasRestantes = 1
-    var vidaRestante = 1
+    var property vidaRestante = 1
     var property barraVida = null
     var property direction = "back"
     var property character = "character1-"
@@ -16,8 +16,9 @@ object toby {
     } 
 
     method monedasRestantes(monedas) = monedas
-    method vidaRestante(vidas) = vidas
-    method valorVida(vida) = vida
+    //method vidaRestante(vidas) = vidas
+    method valorVida(vida) {
+        valorVida = vida}
     method valorVida() = valorVida
     
     method image() = character+ self.direction()+".png"
@@ -76,9 +77,9 @@ object toby {
     }
 
     method restarVida(valor){
-        vidaRestante = (vidaRestante + valor).max(0)
+        vidaRestante = (vidaRestante + valor).min(11)
     }
 
     method monedasRestantes() = monedasRestantes
-    method vidaRestante() = vidaRestante
+    //method vidaRestante() = vidaRestante
 }

@@ -188,9 +188,12 @@ object nivel1 inherits Nivel {
 		game.addVisual(toby)
         game.addVisual(barraVida)
         game.addVisual(barraPuntos)
+        /*if(!background.x()){
         game.whenCollideDo(toby, {algo => self.actualizarBarras()})
+        
         game.onCollideDo(toby,{algo => algo.chocasteCon(toby) })
-	}
+        }*/
+    }
 
     override method configuracionFondo() {
         game.addVisual(fondoNivel1)
@@ -330,13 +333,18 @@ object nivel1 inherits Nivel {
 object nivel2 inherits Nivel{
     override method configuracionInicial(){	
         toby.position(20, 0)
-		game.addVisualCharacter(toby)
+		game.addVisual(toby)
         game.removeVisual(barraVida)
         game.removeVisual(barraPuntos)
         game.addVisual(barraVida)
         game.addVisual(barraPuntos)
+        /*if(!background.x()){
         game.whenCollideDo(toby, {algo => self.actualizarBarras()})
+        
         game.onCollideDo(toby,{algo => algo.chocasteCon(toby) })
+        }*/
+        //game.whenCollideDo(toby, {algo => self.actualizarBarras()})
+        //game.onCollideDo(toby,{algo => algo.chocasteCon(toby) })
 	}
 
     override method configuracionFondo() {
