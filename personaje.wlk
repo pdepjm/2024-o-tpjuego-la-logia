@@ -76,7 +76,7 @@ object toby {
     }
 
     method restarVida(valor){
-        vidaRestante += valor
+        vidaRestante = (vidaRestante + valor).max(0)
     }
 
     method monedasRestantes() = monedasRestantes

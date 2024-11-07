@@ -8,7 +8,7 @@ object escenario {
 
     method iniciarNivel(nuevoNivel) {
         nuevoNivel.configuracionFondo()
-        nuevoNivel.configuracionTeclado()
+        if(!background.x()) nuevoNivel.configuracionTeclado()
         nuevoNivel.instanciarObjetos()
         nuevoNivel.configuracionVisual()
         nuevoNivel.configuracionInicial()
@@ -22,6 +22,10 @@ object escenario {
 
     method nivelPasado() {
             nivel1.removeObjects()
+            toby.valorVida(100)
+            toby.puntos(0)
+            toby.monedasRestantes(1)
+            toby.vidaRestante(1)
             self.iniciarNivel(nivel2)
     }
 
@@ -56,6 +60,10 @@ class Nivel {
 		keyboard.s().onPressDo {toby.moverAbajo()}
 		keyboard.d().onPressDo {toby.moverDerecha()}
 		keyboard.a().onPressDo {toby.moverIzquierda()}
+        keyboard.up().onPressDo {toby.moverArriba()}
+		keyboard.down().onPressDo {toby.moverAbajo()}
+		keyboard.right().onPressDo {toby.moverDerecha()}
+		keyboard.left().onPressDo {toby.moverIzquierda()}
 	}
 
     method configuracionVisual() {
@@ -93,6 +101,7 @@ class Nivel {
 }
 
 object background inherits Nivel {
+    var property x = false
     override method configuracionTeclado() {
             keyboard.enter().onPressDo { self.pressEnter()}
             keyboard.m().onPressDo { self.pressM()}
@@ -115,6 +124,7 @@ object background inherits Nivel {
         toby.monedasRestantes(1)
         toby.vidaRestante(1)
         escenario.iniciarNivel(nivel1) // Inicia el nuevo nivel
+        x = true
     }
 
     method pressM() { 
@@ -175,7 +185,7 @@ object gameover {
 object nivel1 inherits Nivel {
     override method configuracionInicial(){	
         toby.position(20, 0)
-		game.addVisualCharacter(toby)
+		game.addVisual(toby)
         game.addVisual(barraVida)
         game.addVisual(barraPuntos)
         game.whenCollideDo(toby, {algo => self.actualizarBarras()})
@@ -252,7 +262,7 @@ object nivel1 inherits Nivel {
     }
 
     method winLevel() {
-        if(toby.gano(200)) {
+        if(toby.gano(20)) {
             escenario.nivelPasado()
         }
     }
@@ -321,10 +331,8 @@ object nivel2 inherits Nivel{
     override method configuracionInicial(){	
         toby.position(20, 0)
 		game.addVisualCharacter(toby)
-        toby.valorVida(100)
-        toby.puntos(0)
-        toby.monedasRestantes(1)
-        toby.vidaRestante(1)
+        game.removeVisual(barraVida)
+        game.removeVisual(barraPuntos)
         game.addVisual(barraVida)
         game.addVisual(barraPuntos)
         game.whenCollideDo(toby, {algo => self.actualizarBarras()})
