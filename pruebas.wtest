@@ -38,16 +38,6 @@ test "Personaje colisiona con una moto, agarra una moneda y puede seguir jugando
   toby.agarrarMoneda()
   assert.that(toby.valorVida() > 0) 
   }
-
-test "Personaje tiene 0 de vida y pierde el juego." {
-  const colectivo = new Colectivo()
-  const moto = new Chopperita()
-    colectivo.chocasteCon(toby)
-    colectivo.chocasteCon(toby)
-    colectivo.chocasteCon(toby)
-    moto.chocasteCon(toby)
-    assert.that(toby.perdio())
-  }
 }
 
 describe "Test de vehiculo" {

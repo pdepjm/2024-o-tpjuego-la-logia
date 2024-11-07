@@ -4,7 +4,7 @@ object toby {
     const maxY = 0 // Máximo Y (inferior)
     const minX = 0 // Mínimo X (izquierdo)
     const minY = 23 // Mínimo Y (superior)
-    var property valorVida = 100
+    var valorVida = 100
     var property puntos = 0
     var monedasRestantes = 1
     var vidaRestante = 1
@@ -14,6 +14,11 @@ object toby {
     method position(x, y) {
         position = game.at(x, y)
     } 
+
+    method monedasRestantes(monedas) = monedas
+    method vidaRestante(vidas) = vidas
+    method valorVida(vida) = vida
+    method valorVida() = valorVida
     
     method image() = character+ self.direction()+".png"
         

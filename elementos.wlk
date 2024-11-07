@@ -12,9 +12,9 @@ object fondoPortada {
 }
 
 object enter {
-	var property position = game.at(30,-3)
+	var property position = game.at(30,3)
 
-	method image() = "image2.png"
+	method image() = "start1.png"
 
 	method actualizarEnter() {
 			game.onTick(500, "actualizar enter", { => self.visual()})
@@ -59,11 +59,17 @@ object wasd {
 
 object fondoSeleccionSkin {
 	var property position = game.at(0, 0)
-	method image() = "skyblueBackground2.png"	
+	method image() = "skyblueBackground1.png"	
 
-	const skin1 = new Skins(imagen = "character1-front.png", position = game.at(5, 13))
-	const skin2 = new Skins(imagen = "character2-front.png", position = game.at(20, 13))
-	const skin3 = new Skins(imagen = "character3-front.png", position = game.at(34, 13))
+	const skin1 = new Skins(imagen = "characterA-front.png", position = game.at(5, 13))
+	const skin2 = new Skins(imagen = "characterB-front.png", position = game.at(20, 13))
+	const skin3 = new Skins(imagen = "characterC-front.png", position = game.at(34, 13))
+
+	method iniciarSkins(){
+		game.addVisual(skin1)
+		game.addVisual(skin2)
+		game.addVisual(skin3)
+	}
 
 	method positionSkins() {
 		skin1.rotateSkin("characterA-")
@@ -78,6 +84,16 @@ object fondoSeleccionSkin {
 		game.removeVisual(skin1)
 		game.removeVisual(skin2)
 		game.removeVisual(skin3)
+	}
+
+	const keycap1 = new Keycap(imagen = "keycap1.png", position = game.at(7, 11))
+	const keycap2 = new Keycap(imagen = "keycap2.png", position = game.at(22, 11))
+	const keycap3 = new Keycap(imagen = "keycap3.png", position = game.at(36, 11))
+
+	method positionKeycaps() {
+		keycap1.visual()
+		keycap2.visual()
+		keycap3.visual()
 	}
 }
 
@@ -118,6 +134,14 @@ class Skins {
 	method removeTick() {
 		game.removeTickEvent("rotar skin")
 	}
+}
+
+class Keycap {
+	var property imagen 
+	var property position = game.at(0,0)
+	method image() = imagen
+
+	method visual() = game.addVisual(self)
 }
 
 object fondoNivel1 {
@@ -273,6 +297,7 @@ class FiestaTuneado inherits Vehiculo {
 			position = game.at(x, y)
 		} else {
 			position = game.at(44, y)
+			imagen = "spr_rally_2.png"
 		}
 	}
 }
@@ -298,6 +323,7 @@ class Chopperita inherits Vehiculo {
         position = game.at(x, y)
     } else {
         position = game.at(0, y)
+		imagen = "spr_chopper_2.png"
     }
 	}
 }
@@ -323,6 +349,7 @@ class Colectivo inherits Vehiculo {
 			position = game.at(x, y)
 		} else {
 			position = game.at(44, y)
+			imagen = "double decker2.png"
 		}
 	}
 }
