@@ -22,27 +22,19 @@ object escenario {
     }
 
     method nivelPasado() {
-        if(cont == 1){
-            self.removerNivel()
+            nivel1.removeObjects()
             self.iniciarNivel(nivel2)
             cont += 1
-        }else {
-            self.ganarTony()
-        }
-    }
-
-    method removerNivel(){
-            nivel.removeObjects()
     }
 
     method morirToby(){
-        self.removerNivel()
-        self.iniciarNivel(gameover)
+        nivel1.removeObjects()
+        gameover.configuracionFondo()
     }
 
     method ganarTony(){
-        self.removerNivel()
-        self.iniciarNivel(win)
+        nivel1.removeObjects()
+        win.configuracionFondo()
     }    
 }
 
@@ -63,7 +55,7 @@ class Nivel {
     method configuracionInicial(){} 
 
     method configuracionTeclado(){
-		keyboard.w().onPressDo {toby.moverArriba()}
+        keyboard.w().onPressDo {toby.moverArriba()}
 		keyboard.s().onPressDo {toby.moverAbajo()}
 		keyboard.d().onPressDo {toby.moverDerecha()}
 		keyboard.a().onPressDo {toby.moverIzquierda()}
@@ -78,53 +70,6 @@ class Nivel {
     }
 
     method removeObjects() {
-        game.removeVisual(toby)
-        objetos.forEach{o => game.removeVisual(o)}
-        objetosExtra.forEach{o => game.removeVisual(o)}
-        autos1.forEach{a => game.removeVisual(a)}
-        autos2.forEach{a => game.removeVisual(a)}
-        autos3.forEach{a => game.removeVisual(a)}
-        fiestas1.forEach{a => game.removeVisual(a)}
-        fiestas2.forEach{a => game.removeVisual(a)}
-        chopper1.forEach{a => game.removeVisual(a)}
-        chopper2.forEach{a => game.removeVisual(a)}
-        chopper3.forEach{a => game.removeVisual(a)}
-        bus1.forEach{a => game.removeVisual(a)}
-        bus2.forEach{a => game.removeVisual(a)}
-        game.removeTickEvent("Oleada autos 1")
-        game.removeTickEvent("Oleada autos 2")
-        game.removeTickEvent("Oleada autos 3")
-        game.removeTickEvent("Oleada autos 4")
-        game.removeTickEvent("Oleada fiesta 1")
-        game.removeTickEvent("Oleada fiesta 2")
-        game.removeTickEvent("Oleada chopper 1")
-        game.removeTickEvent("Oleada chopper 2")
-        game.removeTickEvent("Oleada bus 1")
-        game.removeTickEvent("Oleada bus 2")
-        game.removeTickEvent("Mover autos 1")
-        game.removeTickEvent("Mover autos 2")
-        game.removeTickEvent("Mover autos 3")
-        game.removeTickEvent("Mover fiestas 1")
-        game.removeTickEvent("Mover fiestas 2")
-        game.removeTickEvent("Mover chopperas 1")
-        game.removeTickEvent("Mover chopperas 2")
-        game.removeTickEvent("Mover chopperas 3")
-        game.removeTickEvent("Mover bus 1")
-        game.removeTickEvent("Mover bus 2")
-        game.removeTickEvent("Generar monedas")
-        objetos.clear()
-        objetosExtra.clear()
-        autos1.clear()
-        autos2.clear()
-        fiestas1.clear()
-        fiestas2.clear()
-        chopper1.clear()
-        chopper2.clear()
-        bus1.clear()
-        bus2.clear()
-        game.removeVisual(barraVida)
-        game.removeVisual(barraPuntos)
-        monedas.removerTodasMonedas()
     }
 
     method actualizarBarras(){
@@ -152,8 +97,8 @@ class Nivel {
 
 object background inherits Nivel {
     override method configuracionTeclado() {
-        keyboard.enter().onPressDo { self.pressEnter()}
-        keyboard.m().onPressDo { self.pressM()}
+            keyboard.enter().onPressDo { self.pressEnter()}
+            keyboard.m().onPressDo { self.pressM()}
     }
 
     override method configuracionFondo() {
@@ -168,6 +113,10 @@ object background inherits Nivel {
         enter.borrarObjeto()
         game.removeVisual(enter)
         game.removeVisual(wasd)
+        toby.puntos(0)
+        toby.valorVida(100)
+        toby.monedasRestantes(1)
+        toby.vidaRestante(1)
         escenario.iniciarNivel(nivel1) // Inicia el nuevo nivel
     }
 
@@ -191,7 +140,9 @@ object selectSkin inherits Nivel {
 
     override method configuracionFondo() {
         game.addVisual(fondoSeleccionSkin)
+        fondoSeleccionSkin.iniciarSkins()
         fondoSeleccionSkin.positionSkins()
+        fondoSeleccionSkin.positionKeycaps()
     }
 
     method selectedCharacter() {
@@ -203,44 +154,23 @@ object selectSkin inherits Nivel {
     method pressEnter(){}
 }
 
-object win inherits Nivel{
-    override method configuracionFondo() {
+object win {
+    method configuracionFondo() {
         game.addVisual(fondoWin)
-    }
-
-    override method configuracionInicial() {
-        self.removeObjects()
-        game.removeVisual(barraPuntos)
-    }
-
-    override method configuracionTeclado(){ 
-        keyboard.enter().onPressDo { self.pressEnter() }
-    }
-
-    method pressEnter() {
-        game.removeVisual(fondoGameOver)
-        self.removeObjects()
-        escenario.iniciarNivel(background) // Inicia el nuevo nivel
     }
 }
 
-object gameover inherits Nivel { 
-    override method configuracionInicial() {
-        self.removeObjects()
-        game.removeVisual(barraPuntos)
+object gameover { 
+    method configuracionTeclado(){ 
+        keyboard.r().onPressDo { self.pressR() }
     }
 
-    override method configuracionTeclado(){ 
-        keyboard.enter().onPressDo { self.pressEnter() }
-    }
-
-    override method configuracionFondo() {
+    method configuracionFondo() {
         game.addVisual(fondoGameOver)
     }
 
-    method pressEnter() {
+    method pressR() {
         game.removeVisual(fondoGameOver)
-        self.removeObjects()
         escenario.iniciarNivel(background) // Inicia el nuevo nivel
     }
 }
@@ -280,10 +210,6 @@ object nivel1 inherits Nivel {
     override method instanciarObjetosExtra() {
     }
 
-    method removerFondo() {
-        game.removeVisual(fondoNivel1) // Remueve el fondo del nivel actual si cambia de nivel
-    }
-
     override method configuracionVehiculos() {        
         game.onTick(3000, "Oleada autos 1", {=> carTraffic.generarAutos(autos1,2, -4, 2)}) 
         game.onTick(1000, "Oleada autos 2", {=> carTraffic.generarAutos(autos2, 2, -4, 2)})
@@ -317,27 +243,19 @@ object nivel1 inherits Nivel {
         game.onTick(100, "Mover chopperas 2", {=> chopperTraffic.moverChopper(chopper2)})
         game.onTick(100, "Mover chopperas 3", {=> chopperTraffic.moverChopper(chopper3)})
 
-        game.onTick(100, "Mover bus 1", {=> chopperTraffic.moverChopper(bus1)})
-        game.onTick(100, "Mover bus 2", {=> chopperTraffic.moverChopper(bus2)})
+        game.onTick(100, "Mover bus 1", {=> busTraffic.moverBus(bus1)})
+        game.onTick(100, "Mover bus 2", {=> busTraffic.moverBus(bus2)})
     }
 
     method loseLevel() { 
         if(toby.perdio()) {
-            self.removeObjects()
-            game.removeVisual(fondoNivel1)
-            toby.puntos(0)
-            toby.valorVida(100)
-            escenario.iniciarNivel(gameover)
+            escenario.morirToby()
         }
     }
 
     method winLevel() {
         if(toby.gano(200)) {
-            self.removeObjects()
-            game.removeVisual(fondoNivel1)
-            toby.puntos(0)
-            toby.valorVida(100)
-            escenario.iniciarNivel(win)
+            escenario.nivelPasado()
         }
     }
 
@@ -348,6 +266,68 @@ object nivel1 inherits Nivel {
     override method ganarNivel(){
 		game.whenCollideDo(monedas, {algo => self.winLevel()})
     }
+
+    override method removeObjects() {
+        game.removeVisual(toby)
+        objetos.forEach{o => game.removeVisual(o)}
+        objetosExtra.forEach{o => game.removeVisual(o)}
+        autos1.forEach{a => game.removeVisual(a)}
+        autos2.forEach{a => game.removeVisual(a)}
+        autos3.forEach{a => game.removeVisual(a)}
+        fiestas1.forEach{a => game.removeVisual(a)}
+        fiestas2.forEach{a => game.removeVisual(a)}
+        chopper1.forEach{a => game.removeVisual(a)}
+        chopper2.forEach{a => game.removeVisual(a)}
+        chopper3.forEach{a => game.removeVisual(a)}
+        bus1.forEach{a => game.removeVisual(a)}
+        bus2.forEach{a => game.removeVisual(a)}
+        game.removeTickEvent("Oleada autos 1")
+        game.removeTickEvent("Oleada autos 2")
+        game.removeTickEvent("Oleada autos 3")
+        game.removeTickEvent("Oleada autos 4")
+        game.removeTickEvent("Oleada fiesta 1")
+        game.removeTickEvent("Oleada fiesta 2")
+        game.removeTickEvent("Oleada chopper 1")
+        game.removeTickEvent("Oleada chopper 2")
+        game.removeTickEvent("Oleada bus 1")
+        game.removeTickEvent("Oleada bus 2")
+        game.removeTickEvent("Mover autos 1")
+        game.removeTickEvent("Mover autos 2")
+        game.removeTickEvent("Mover autos 3")
+        game.removeTickEvent("Mover fiestas 1")
+        game.removeTickEvent("Mover fiestas 2")
+        game.removeTickEvent("Mover chopperas 1")
+        game.removeTickEvent("Mover chopperas 2")
+        game.removeTickEvent("Mover chopperas 3")
+        game.removeTickEvent("Mover bus 1")
+        game.removeTickEvent("Mover bus 2")
+        game.removeTickEvent("Generar monedas")
+        objetos.forEach{a => objetos.remove(a)}
+        objetosExtra.forEach{a => objetosExtra.remove(a)}
+        autos1.forEach{a => autos1.remove(a)}
+        autos2.forEach{a => autos2.remove(a)}
+        fiestas1.forEach{a => fiestas1.remove(a)}
+        fiestas2.forEach{a => fiestas2.remove(a)}
+        chopper1.forEach{a => chopper1.remove(a)}
+        chopper2.forEach{a => chopper2.remove(a)}
+        bus1.forEach{a => bus1.remove(a)}
+        bus2.forEach{a => autos2.remove(a)}
+        game.removeVisual(barraVida)
+        game.removeVisual(barraPuntos)
+        game.removeVisual(fondoNivel1)
+        monedas.removerTodasMonedas()
+    }
 }
 
-object nivel2 inherits Nivel{}
+object nivel2 inherits Nivel{
+    var property won = true 
+    override method ganarNivel(){
+        game.schedule(5000, {self.winLevel2()})
+    }
+
+    method winLevel2() {
+        if(won)
+        escenario.ganarTony()
+        won = false
+    }
+}
