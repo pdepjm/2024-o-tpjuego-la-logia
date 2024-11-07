@@ -109,24 +109,15 @@ class Skins {
 
 	method actualizarImagen(image) {
 		if(facing == 1){
-			imagen = image + "front.png"
-			game.removeVisual(self)
-			game.addVisual(self)
 			facing = 2
 		} else if(facing == 2){
 			imagen = image + "left.png"
-			game.removeVisual(self)
-			game.addVisual(self)
-			facing = 3
+				facing = 3
 		} else if(facing == 3){
 			imagen = image + "back.png"
-			game.removeVisual(self)
-			game.addVisual(self)
 			facing = 4
 		}else if(facing == 4){
 			imagen = image + "right.png"
-			game.removeVisual(self)
-			game.addVisual(self)
 			facing = 1
 		}
 	}

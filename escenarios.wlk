@@ -5,7 +5,6 @@ import wollok.game.*
 
 object escenario {
     var property nivel = null
-    var cont = 1
 
     method iniciarNivel(nuevoNivel) {
         nuevoNivel.configuracionFondo()
@@ -24,7 +23,6 @@ object escenario {
     method nivelPasado() {
             nivel1.removeObjects()
             self.iniciarNivel(nivel2)
-            cont += 1
     }
 
     method morirToby(){
