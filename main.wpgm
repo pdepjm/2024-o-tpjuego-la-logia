@@ -10,6 +10,5 @@ program WollokRoad {
 	game.width(44)
 	game.cellSize(40)
 	escenario.iniciarNivel(background) 
-
 	game.start()
 }
