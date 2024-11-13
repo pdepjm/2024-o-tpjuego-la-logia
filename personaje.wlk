@@ -68,7 +68,7 @@ object toby {
         puntos += 20
     }   
 
-    method perdio()= self.valorVida() == 0
+    method perdio() = self.valorVida() == 0
     method gano(puntosNecesarios) = self.puntos() >= puntosNecesarios
 
     method obtenerMoneda() {

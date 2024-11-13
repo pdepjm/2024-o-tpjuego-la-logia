@@ -20,17 +20,12 @@ object escenario {
         self.nivel(nuevoNivel)
     }
 
-    method nivelPasado() {
-            nivel1.removeObjects()
-            win.configuracionFondo()
-    }
-
     method morirToby(){
         nivel1.removeObjects()
         gameover.configuracionFondo()
     }
 
-    method ganarTony(){
+    method ganarToby(){
         nivel1.removeObjects()
         win.configuracionFondo()
     }    
@@ -161,8 +156,6 @@ object win {
     method configuracionFondo() {
         game.addVisual(fondoWin)
     }
-
-    method winLevel(){}
 }
 
 object gameover { 
@@ -209,24 +202,33 @@ object nivel1 inherits Nivel {
         objetos.add(new Road(position = game.at(0, 20)))
         objetos.add(new Road(position = game.at(0, 21)))
     
-        game.onTick(1000, "Generar monedas", {=> monedas.generarMonedas(3)})
+        game.onTick(5000, "Generar monedas", {=> monedas.generarMonedas(3)})
     }
 
     override method instanciarObjetosExtra() {
     }
 
     override method configuracionVehiculos() {        
-        game.onTick(3000, "Oleada autos 1", {=> carTraffic.generarAutos(autos1,2, -4, 2)}) 
-        game.onTick(1000, "Oleada autos 2", {=> carTraffic.generarAutos(autos2, 2, -4, 2)})
+        game.onTick(5000, "Oleada autos 1", {=> carTraffic.generarAutos(autos1,3, -4, 2)}) 
+        game.onTick(3000, "Oleada autos 2", {=> carTraffic.generarAutos(autos2, 3, -4, 2)})
 
-        game.onTick(4500, "Oleada autos 3", {=> carTraffic.generarAutos(autos1,2, -4, 4)}) 
-        game.onTick(1900, "Oleada autos 4", {=> carTraffic.generarAutos(autos2, 2, -4, 4)})
+        game.onTick(6500, "Oleada autos 3", {=> carTraffic.generarAutos(autos1,3, -4, 4)}) 
+        game.onTick(2900, "Oleada autos 4", {=> carTraffic.generarAutos(autos2, 3, -4, 4)})
 
-        game.onTick(4500, "Oleada autos 5", {=> carTraffic.generarAutos(autos3, 2, -4, 20)})
-        game.onTick(1900, "Oleada autos 6", {=> carTraffic.generarAutos(autos3, 2, -4, 20)})
+        game.onTick(6500, "Oleada autos 5", {=> carTraffic.generarAutos(autos3, 2, -4, 20)})
+        game.onTick(2900, "Oleada autos 6", {=> carTraffic.generarAutos(autos3, 2, -4, 20)})
 
-        game.onTick(4000, "Oleada fiesta 1", {=> fiestaTraffic.generarAutos(fiestas1, 1, 44, 6)}) 
-        game.onTick(10000, "Oleada fiesta 2", {=> fiestaTraffic.generarAutos(fiestas2, 1, 44, 6)}) 
+        game.onTick(6000, "Oleada auto 7", {=> carTraffic.generarAutos(autos1, 3, -4, 11)})
+        game.onTick(3500, "Oleada auto 8", {=> carTraffic.generarAutos(autos2, 3, -4, 11)})
+
+        game.onTick(1000, "Oleada fiesta 1", {=> fiestaTraffic.generarAutos(fiestas1, 3, 44, 6)}) 
+        game.onTick(4000, "Oleada fiesta 2", {=> fiestaTraffic.generarAutos(fiestas2, 3, 44, 6)}) 
+
+        game.onTick(1500, "Oleada fiesta 3", {=> fiestaTraffic.generarAutos(fiestas1, 3, 44, 12)})
+        game.onTick(3000, "Oleada fiesta 4", {=> fiestaTraffic.generarAutos(fiestas2, 3, 44, 12)})
+        
+        game.onTick(1600, "Oleada fiesta 5", {=> fiestaTraffic.generarAutos(fiestas1, 3, 44, 15)})
+        game.onTick(4500, "Oleada fiesta 6", {=> fiestaTraffic.generarAutos(fiestas2, 3, 44, 15)})
 
         game.onTick(3000, "Oleada chopper 1", {=> chopperTraffic.generarChopper(chopper1 ,3, -4, 9)}) 
         game.onTick(5000, "Oleada chopper 2", {=> chopperTraffic.generarChopper(chopper2, 3, -4, 9)}) 
@@ -234,14 +236,17 @@ object nivel1 inherits Nivel {
         game.onTick(4400, "Oleada chopper 3", {=> chopperTraffic.generarChopper(chopper1, 3, -4, 21)}) 
         game.onTick(7000, "Oleada chopper 4", {=> chopperTraffic.generarChopper(chopper2, 3, -4, 21)}) 
 
-        game.onTick(3000, "Oleada chopper 5", {=> chopperTraffic.generarChopper(chopper1, 3, -4, 15)}) 
-        game.onTick(6000, "Oleada chopper 6", {=> chopperTraffic.generarChopper(chopper2, 3, -4, 15)}) 
+        game.onTick(5000, "Oleada chopper 5", {=> chopperTraffic.generarChopper(chopper1, 3, -4, 17)})
+        game.onTick(8000, "Oleada chopper 6", {=> chopperTraffic.generarChopper(chopper2, 3, -4, 17)})
 
-        game.onTick(2000, "Oleada bus 1", {=> busTraffic.generarBus(bus1 ,2, 44, 19)}) 
-        game.onTick(9000, "Oleada bus 2", {=> busTraffic.generarBus(bus2, 1, 44, 19)}) 
+        game.onTick(2500, "Oleada bus 1", {=> busTraffic.generarBus(bus1 ,3, 44, 19)}) 
+        game.onTick(9000, "Oleada bus 2", {=> busTraffic.generarBus(bus2, 3, 44, 19)}) 
 
-        game.onTick(1500, "Oleada bus 3", {=> busTraffic.generarBus(bus1 ,2, 44, 7)})
-        game.onTick(7000, "Oleada bus 4", {=> busTraffic.generarBus(bus2, 2, 44, 7)})
+        game.onTick(1500, "Oleada bus 3", {=> busTraffic.generarBus(bus1 ,3, 44, 7)})
+        game.onTick(7000, "Oleada bus 4", {=> busTraffic.generarBus(bus2, 3, 44, 7)})
+
+        game.onTick(2900, "Oleada bus 5", {=> busTraffic.generarBus(bus1, 3, 44, 14)})
+        game.onTick(5100, "Oleada bus 6", {=> busTraffic.generarBus(bus2, 3, 44, 14)})
 
         game.onTick(100, "Mover autos 1", {=> carTraffic.moverAutos(autos1)})
         game.onTick(100, "Mover autos 2", {=> carTraffic.moverAutos(autos2)})
@@ -264,8 +269,8 @@ object nivel1 inherits Nivel {
     }
 
     method winLevel() {
-        if(toby.gano(20)) {
-            escenario.ganarTony()
+        if(toby.gano(200)) {
+            escenario.ganarToby()
         }
     }
 
@@ -274,7 +279,7 @@ object nivel1 inherits Nivel {
     }
 
     override method ganarNivel(){
-		game.whenCollideDo(monedas, {algo => self.winLevel()})
+		game.whenCollideDo(monedas, {toby => self.winLevel()})
     }
 
     override method removeObjects() {
@@ -295,10 +300,22 @@ object nivel1 inherits Nivel {
         game.removeTickEvent("Oleada autos 2")
         game.removeTickEvent("Oleada autos 3")
         game.removeTickEvent("Oleada autos 4")
+        game.removeTickEvent("Oleada autos 5")
+        game.removeTickEvent("Oleada autos 6")
+        game.removeTickEvent("Oleada autos 7")
+        game.removeTickEvent("Oleada autos 8")
         game.removeTickEvent("Oleada fiesta 1")
         game.removeTickEvent("Oleada fiesta 2")
+        game.removeTickEvent("Oleada fiesta 3")
+        game.removeTickEvent("Oleada fiesta 4")
+        game.removeTickEvent("Oleada fiesta 5")
+        game.removeTickEvent("Oleada fiesta 6")
         game.removeTickEvent("Oleada chopper 1")
         game.removeTickEvent("Oleada chopper 2")
+        game.removeTickEvent("Oleada chopper 3")
+        game.removeTickEvent("Oleada chopper 4")
+        game.removeTickEvent("Oleada chopper 5")
+        game.removeTickEvent("Oleada chopper 6")
         game.removeTickEvent("Oleada bus 1")
         game.removeTickEvent("Oleada bus 2")
         game.removeTickEvent("Oleada bus 3")
@@ -310,7 +327,6 @@ object nivel1 inherits Nivel {
         game.removeTickEvent("Mover fiestas 2")
         game.removeTickEvent("Mover chopperas 1")
         game.removeTickEvent("Mover chopperas 2")
-        game.removeTickEvent("Mover chopperas 3")
         game.removeTickEvent("Mover bus 1")
         game.removeTickEvent("Mover bus 2")
         game.removeTickEvent("Generar monedas")
@@ -318,12 +334,13 @@ object nivel1 inherits Nivel {
         objetosExtra.forEach{a => objetosExtra.remove(a)}
         autos1.forEach{a => autos1.remove(a)}
         autos2.forEach{a => autos2.remove(a)}
+        autos3.forEach{a => autos3.remove(a)}
         fiestas1.forEach{a => fiestas1.remove(a)}
         fiestas2.forEach{a => fiestas2.remove(a)}
         chopper1.forEach{a => chopper1.remove(a)}
         chopper2.forEach{a => chopper2.remove(a)}
         bus1.forEach{a => bus1.remove(a)}
-        bus2.forEach{a => autos2.remove(a)}
+        bus2.forEach{a => bus2.remove(a)}
         game.removeVisual(barraVida)
         game.removeVisual(barraPuntos)
         game.removeVisual(fondoNivel1)
